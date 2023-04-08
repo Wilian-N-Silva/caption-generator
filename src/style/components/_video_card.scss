@@ -1,0 +1,33 @@
+.video-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid gray;
+
+  &__thumbnail {
+    min-width: 200px;
+    max-width: 200px;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  &__title {
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font: 700 24px/130% sans-serif;
+  }
+  &__channel {
+    font: 600 16px/130% sans-serif;
+  }
+}

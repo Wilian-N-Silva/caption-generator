@@ -1,0 +1,12 @@
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  & input {
+    padding: 8px 16px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    font: 400 16px/150% sans-serif;
+  }
+}
