@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { RawLyrics, YouTubeOEmbed } from "../global/Interfaces"
 import { Navigate, useNavigate } from "react-router-dom"
+import { VideoCard } from "../components/VideoCard"
 
 const example: RawLyrics = {
   videoId: "https://www.youtube.com/watch?v=3wgGKpdv1t8",
@@ -105,17 +106,7 @@ export function Home() {
           <button type="submit">Procurar</button>
         </form>
 
-        {videoData && (
-          <div className="video-card">
-            <div className="video-card__thumbnail">
-              <img src={videoData.thumbnail_url} alt="" />
-            </div>
-            <div className="video-card__info">
-              <h3 className="video-card__title">{videoData.title}</h3>
-              <h4 className="video-card__channel">{videoData.author_name}</h4>
-            </div>
-          </div>
-        )}
+        {videoData && <VideoCard {...videoData}/>}
 
         {videoData && (
           <form onSubmit={handleLyricsSubmit}>
