@@ -1,63 +1,46 @@
 import { useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { TimedLyrics } from "../global/Interfaces"
+import { Instructions } from "../components/Instructions"
 
 export function Caption() {
   const location = useLocation()
-
   const { rawLyricsData } = location.state
 
+  const [selectedIdx, setSelectedIdx] = useState<number>(0)
   const [videoId, setVideoId] = useState<string>("")
   const [lyricsArr, setLyricsArr] = useState<string[]>([])
   const [timedLyrics, setTimedLyrics] = useState<TimedLyrics[]>([])
-  const ref = useRef<HTMLDivElement>(null)
-  const [lyricIndex, setLyricIndex] = useState(0)
-
-  const clearHighlight = () => {
-    const highlighted = document.querySelector(".raw__lyric--selected")
-
-    if (highlighted) {
-      highlighted.classList.toggle("raw__lyric--selected")
-    }
-  }
-
-  // const highlightForwards = () => {
-  //   if (currentLetter >= LETTER_COUNT - 1) {
-  //     currentLetter = 0
-  //   } else {
-  //     currentLetter++
-  //   }
-  //   navigateLyric()
-  // }
-  // const highlightBackwards = () => {
-  //   if (currentLetter <= 0) {
-  //     currentLetter = LETTER_COUNT - 1
-  //   } else {
-  //     currentLetter--
-  //   }
-  //   navigateLyric()
-  // }
-
-  const navigateLyric = () => {
-    clearHighlight()
-
-    // currentNode?.classList.toggle("raw__lyric--selected")
-    const childrens = Array.from(ref.current!.children)
-  
-  }
-
-  const handleRawLyricsEl = () => {
-    setLyricIndex(0)
-    navigateLyric()
-  }
 
   const handleLocationData = () => {
-    const splittedLyrics = rawLyricsData.lyrics.split("\n")
+    const splittedLyrics = rawLyricsData.lyrics
+      .split("\n")
+      .filter((lyric: string) => lyric)
+
+    console.log(splittedLyrics)
 
     setVideoId(rawLyricsData.videoId)
     setLyricsArr(splittedLyrics)
+  }
 
-    handleRawLyricsEl()
+  const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
+    console.log(ev)
+
+    if (ev.code === "ArrowUp") {
+      setSelectedIdx((prevIdx) =>
+        prevIdx === null
+          ? 0
+          : (prevIdx - 1 + lyricsArr.length) % lyricsArr.length
+      )
+    } else if (ev.code === "ArrowDown") {
+      setSelectedIdx((prevIdx) =>
+        prevIdx === null ? 0 : (prevIdx + 1) % lyricsArr.length
+      )
+    } else if (ev.code === "Space") {
+      if (selectedIdx !== null) {
+        alert(`Índice: ${selectedIdx}, Texto: ${lyricsArr[selectedIdx]}`)
+      }
+    }
   }
 
   useEffect(() => {
@@ -67,27 +50,17 @@ export function Caption() {
   return (
     <>
       <div className="player"></div>
-      <div className="instructions">
-        <span>
-          <kbd className="key">P</kbd> Pause
-        </span>
-        <span>
-          <div className="col">
-            <kbd className="key">↑</kbd>
-            <div className="row">
-              <kbd className="key key--disabled">←</kbd>
-              <kbd className="key">↓</kbd>
-              <kbd className="key key--disabled">→</kbd>
-            </div>
-          </div>
-          Mover
-        </span>
-      </div>
+      <Instructions/>
       <div className="lyrics">
-        <div ref={ref} className="raw">
+        <div className="raw" onKeyDown={handleKeyDown} tabIndex={0}>
           {lyricsArr.map((row, index) => {
             return (
-              <div key={`raw_${index}`} className="raw__lyric">
+              <div
+                key={`raw_${index}`}
+                className={`raw__lyric ${
+                  index === selectedIdx ? "raw__lyric--selected" : ""
+                }`}
+              >
                 {row}
               </div>
             )

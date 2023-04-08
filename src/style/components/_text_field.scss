@@ -3,7 +3,8 @@
   flex-direction: column;
   gap: 4px;
   width: 100%;
-  & input {
+  & input,
+  & textarea {
     padding: 8px 16px;
     border: 1px solid gray;
     border-radius: 8px;
