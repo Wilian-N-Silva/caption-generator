@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { TimedLyrics } from "../global/Interfaces"
 import { Instructions } from "../components/Instructions"
+import { Player } from "../components/Player"
+import ReactPlayer from "react-player"
 
 export function Caption() {
   const location = useLocation()
@@ -49,8 +51,11 @@ export function Caption() {
 
   return (
     <>
-      <div className="player"></div>
-      <Instructions/>
+      <ReactPlayer
+        url={`https://www.youtube.com/watch?v=${videoId}`}
+        onProgress={(progress) => console.log(progress)}
+      />
+      <Instructions />
       <div className="lyrics">
         <div className="raw" onKeyDown={handleKeyDown} tabIndex={0}>
           {lyricsArr.map((row, index) => {
