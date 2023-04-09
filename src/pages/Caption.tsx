@@ -8,6 +8,7 @@ import ReactPlayer from "react-player"
 export function Caption() {
   const location = useLocation()
   const playerRef = useRef<ReactPlayer>(null)
+  
   const { rawLyricsData } = location.state
 
   const [selectedIdx, setSelectedIdx] = useState<number>(0)
@@ -25,6 +26,11 @@ export function Caption() {
     setLyricsArr(splittedLyrics)
   }
 
+  const secondsToISOPlayTime = (seconds: number) => {
+    const formattedTime = new Date(seconds * 1000).toISOString().slice(14, 23)
+    return formattedTime
+  }
+
   const previousCaptionIndex = () => {
     setSelectedIdx((prevIdx) =>
       prevIdx === null ? 0 : (prevIdx - 1 + lyricsArr.length) % lyricsArr.length
@@ -36,31 +42,38 @@ export function Caption() {
     )
   }
 
-  const secondsToISOPlayTime = (seconds: number) => {
-    const formattedTime = new Date(seconds * 1000).toISOString().slice(14, 23)
-    return formattedTime
+  const rewindVideo = () => {
+    const newTime = playerRef.current?.getCurrentTime()! - 10
+    playerRef.current?.seekTo(newTime)
+  }
+
+  const fastForwardVideo = () => {
+    const newTime = playerRef.current?.getCurrentTime()! + 10
+    playerRef.current?.seekTo(newTime)
   }
 
   const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
-    console.log(ev)
-
-    if (ev.code === "ArrowUp") {
-      previousCaptionIndex()
-    } else if (ev.code === "ArrowDown") {
-      nextCaptionIndex()
-    } else if (ev.code === "Space") {
-      if (selectedIdx !== null) {
-        alert(`Índice: ${selectedIdx}, Texto: ${lyricsArr[selectedIdx]}`)
+    switch (ev.code) {
+      case "ArrowUp":
+        previousCaptionIndex()
+        break
+      case "ArrowDown":
         nextCaptionIndex()
-      }
-    } else if (ev.code === "ArrowLeft") {
-      const newTime = playerRef.current?.getCurrentTime()! - 10
-      playerRef.current?.seekTo(newTime)
-    } else if (ev.code === "ArrowRight") {
-      const newTime = playerRef.current?.getCurrentTime()! + 10
-      playerRef.current?.seekTo(newTime)
-    } else if (ev.code === "KeyP") {
-      setIsPlayingVideo((prevState) => !prevState)
+      case "ArrowLeft":
+        rewindVideo()
+        break
+      case "ArrowRight":
+        fastForwardVideo()
+        break
+      case "KeyP":
+        setIsPlayingVideo((prevState) => !prevState)
+        break
+      case "Space":
+        if (selectedIdx !== null) {
+          alert(`Índice: ${selectedIdx}, Texto: ${lyricsArr[selectedIdx]}`)
+          nextCaptionIndex()
+        }
+        break
     }
   }
 
