@@ -6,7 +6,7 @@ import { VideoCard } from "../components/VideoCard"
 import { mock } from "../global/Mock"
 
 export function Home() {
-  const MOCK_INDEX = 1;
+  const MOCK_INDEX = 1
   const navigate = useNavigate()
   // const [videoUrl, setVideoUrl] = useState<string>('')
   const [videoUrl, setVideoUrl] = useState<string>(mock[MOCK_INDEX].videoId)

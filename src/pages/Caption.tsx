@@ -8,7 +8,7 @@ import ReactPlayer from "react-player"
 export function Caption() {
   const location = useLocation()
   const playerRef = useRef<ReactPlayer>(null)
-  
+
   const { rawLyricsData } = location.state
 
   const [selectedIdx, setSelectedIdx] = useState<number>(0)
@@ -53,12 +53,15 @@ export function Caption() {
   }
 
   const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
+    console.log(ev.code)
+
     switch (ev.code) {
       case "ArrowUp":
         previousCaptionIndex()
         break
       case "ArrowDown":
         nextCaptionIndex()
+        break
       case "ArrowLeft":
         rewindVideo()
         break
@@ -74,6 +77,8 @@ export function Caption() {
           nextCaptionIndex()
         }
         break
+      default:
+        break
     }
   }
 
@@ -87,6 +92,7 @@ export function Caption() {
         ref={playerRef}
         url={`https://www.youtube.com/watch?v=${videoId}`}
         playing={isPlayingVideo}
+        // muted={true}
         onProgress={(progress) => {
           setPlayedSeconds(progress.playedSeconds)
         }}
