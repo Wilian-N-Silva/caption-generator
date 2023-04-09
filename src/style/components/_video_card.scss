@@ -1,14 +1,16 @@
 .video-card {
   display: flex;
   gap: 16px;
-  padding: 16px;
+  padding: 8px;
   border-radius: 8px;
   border: 1px solid gray;
+  transition: 0.3s linear;
+  outline: 1px solid transparent;
 
   &__thumbnail {
     min-width: 200px;
     max-width: 200px;
-
+    overflow: hidden;
     img {
       object-fit: cover;
     }
@@ -18,18 +20,23 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    padding: 8px 0;
   }
-  
+
   &__title {
     white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     font: 700 24px/130% sans-serif;
-
   }
   &__channel {
-    font: 600 16px/130% sans-serif;
+    font: 500 16px/130% sans-serif;
     opacity: 0.6;
+  }
+
+  &:hover {
+    cursor: pointer;
+    outline: 1px solid black;
   }
 }

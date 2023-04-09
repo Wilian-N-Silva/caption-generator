@@ -55,6 +55,7 @@ export function Home() {
       )
       .then((response) => {
         setVideoData(response.data)
+        console.log(response.data)
       })
   }
 
@@ -64,7 +65,6 @@ export function Home() {
     if (!isValid) return
 
     setVideoId(isValid.toString())
-
     fetchVideoData(isValid)
   }
 
@@ -93,7 +93,10 @@ export function Home() {
           </h2>
         </div>
 
-        <form onSubmit={handleURLFormSubmit}>
+        <form
+          className="home__form flex__col flex__col--centered"
+          onSubmit={handleURLFormSubmit}
+        >
           <div className="text-field">
             <label htmlFor="url-input">URL do vídeo</label>
             <input
@@ -103,15 +106,24 @@ export function Home() {
               onChange={(e) => setVideoUrl(e.target.value)}
             />
           </div>
-          <button type="submit">Procurar</button>
+          <button className="button" type="submit">
+            Procurar
+          </button>
         </form>
 
-        {videoData && <VideoCard {...videoData}/>}
+        {videoData && (
+          <a className="home__card-link" href={videoUrl} target="_blank" rel="noopener noreferrer">
+            <VideoCard {...videoData} />
+          </a>
+        )}
 
         {videoData && (
-          <form onSubmit={handleLyricsSubmit}>
+          <form
+            className="home__form flex__col flex__col--centered"
+            onSubmit={handleLyricsSubmit}
+          >
             <div className="text-field">
-              <label htmlFor="lyrics-input"></label>
+              <label htmlFor="lyrics-input">Letra</label>
               <textarea
                 name=""
                 id="lyrics-input"
@@ -121,7 +133,9 @@ export function Home() {
                 value={lyrics}
               />
             </div>
-            <button type="submit">Continuar</button>
+            <button className="button" type="submit">
+              Continuar
+            </button>
           </form>
         )}
       </div>

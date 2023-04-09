@@ -6,7 +6,7 @@
   &__container {
     display: flex;
     flex-direction: column;
-   align-items: stretch;
+    align-items: stretch;
     gap: 32px;
     max-width: 768px;
   }
@@ -17,5 +17,9 @@
   }
   &__subtitle {
     font: 500 16px/130% sans-serif;
+  }
+
+  &__form {
+    gap: 16px;
   }
 }

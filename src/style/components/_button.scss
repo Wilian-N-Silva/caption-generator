@@ -1,0 +1,10 @@
+.button {
+  padding: 12px 24px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1) translateY(-2px);
+  }
+}
