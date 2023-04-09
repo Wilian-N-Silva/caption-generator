@@ -20,7 +20,7 @@ export interface RawLyrics {
 }
 
 export interface TimedLyrics {
-  start: string,
-  end: string,
+  start: number,
+  end: number,
   text: string
 }

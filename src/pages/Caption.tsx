@@ -5,6 +5,11 @@ import { Instructions } from "../components/Instructions"
 import { Player } from "../components/Player"
 import ReactPlayer from "react-player"
 
+interface captionTimestamp {
+  start: number
+  end: number
+}
+
 export function Caption() {
   const location = useLocation()
   const playerRef = useRef<ReactPlayer>(null)
@@ -17,6 +22,9 @@ export function Caption() {
   const [timedLyrics, setTimedLyrics] = useState<TimedLyrics[]>([])
   const [playedSeconds, setPlayedSeconds] = useState<number>(0)
   const [isPlayingVideo, setIsPlayingVideo] = useState<boolean>(false)
+  const [isPressingSpace, setIsPressingSpace] = useState<boolean>(false)
+  const [captionTimestampStart, setCaptionTimestampStart] = useState<number>(0)
+  const [verse, setVerse] = useState<string | null>()
 
   const handleLocationData = () => {
     const splittedLyrics = rawLyricsData.lyrics
@@ -24,6 +32,18 @@ export function Caption() {
       .filter((lyric: string) => lyric)
     setVideoId(rawLyricsData.videoId)
     setLyricsArr(splittedLyrics)
+  }
+
+  const handleVerse = (seconds: number) => {
+    const legenda = timedLyrics.find(
+      (caption) => caption.start <= seconds && caption.end >= seconds
+    )
+
+    if (!legenda) {
+      setVerse("")
+      return
+    }
+    setVerse(legenda.text)
   }
 
   const secondsToISOPlayTime = (seconds: number) => {
@@ -52,9 +72,23 @@ export function Caption() {
     playerRef.current?.seekTo(newTime)
   }
 
-  const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
-    console.log(ev.code)
+  const handleKeyUp = (ev: React.KeyboardEvent<HTMLDivElement>) => {
+    if (ev.code === "Space") {
+      setIsPressingSpace(false)
+      const timed: TimedLyrics = {
+        text: lyricsArr[selectedIdx],
+        start: captionTimestampStart,
+        end: playedSeconds,
+      }
 
+      const newData = [...timedLyrics, timed]
+
+      setTimedLyrics(newData)
+
+      nextCaptionIndex()
+    }
+  }
+  const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
     switch (ev.code) {
       case "ArrowUp":
         previousCaptionIndex()
@@ -72,9 +106,9 @@ export function Caption() {
         setIsPlayingVideo((prevState) => !prevState)
         break
       case "Space":
-        if (selectedIdx !== null) {
-          alert(`Índice: ${selectedIdx}, Texto: ${lyricsArr[selectedIdx]}`)
-          nextCaptionIndex()
+        if (selectedIdx !== null && !ev.repeat) {
+          setIsPressingSpace(true)
+          setCaptionTimestampStart(playedSeconds)
         }
         break
       default:
@@ -87,20 +121,29 @@ export function Caption() {
   }, [])
 
   return (
-    <>
-      <ReactPlayer
-        ref={playerRef}
-        url={`https://www.youtube.com/watch?v=${videoId}`}
-        playing={isPlayingVideo}
-        // muted={true}
-        onProgress={(progress) => {
-          setPlayedSeconds(progress.playedSeconds)
-        }}
-      />
-      <Instructions />
-      {secondsToISOPlayTime(playedSeconds)}
+    <div>
+      <div>
+        <ReactPlayer
+          ref={playerRef}
+          url={`https://www.youtube.com/watch?v=${videoId}`}
+          playing={isPlayingVideo}
+          // muted={true}
+          progressInterval={100}
+          onProgress={(progress) => {
+            setPlayedSeconds(progress.playedSeconds)
+            handleVerse(progress.playedSeconds)
+          }}
+        />
+        <Instructions isPressingSpace={isPressingSpace} />
+      </div>
+      <div className="captions">{verse}</div>
       <div className="lyrics">
-        <div className="raw" onKeyDown={handleKeyDown} tabIndex={0}>
+        <div
+          className="raw"
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          tabIndex={0}
+        >
           {lyricsArr.map((row, index) => {
             return (
               <div
@@ -125,6 +168,6 @@ export function Caption() {
           })}
         </div>
       </div>
-    </>
+    </div>
   )
 }

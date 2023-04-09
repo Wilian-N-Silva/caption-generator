@@ -1,7 +1,11 @@
 import { KeyboardArrows } from "./KeyboardArrows"
 import { KeyboardKey } from "./KeyboardKey"
 
-export function Instructions() {
+interface InstructionsProps {
+  isPressingSpace: boolean
+}
+
+export function Instructions({isPressingSpace}:InstructionsProps) {
   return (
     <div className="instructions">
       <div className="instructions__detail">
@@ -13,7 +17,7 @@ export function Instructions() {
 
       <div className="instructions__detail">
         <div className="instructions__keys">
-          <KeyboardKey label="Espaço" isSpacebar={true} />
+          <KeyboardKey label="Espaço" isSpacebar={true} isPressing={isPressingSpace} />
         </div>
         <div className="instructions__label">Legendar</div>
       </div>
