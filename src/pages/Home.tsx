@@ -3,42 +3,17 @@ import { useEffect, useState } from "react"
 import { RawLyrics, YouTubeOEmbed } from "../global/Interfaces"
 import { Navigate, useNavigate } from "react-router-dom"
 import { VideoCard } from "../components/VideoCard"
-
-const example: RawLyrics = {
-  videoId: "https://www.youtube.com/watch?v=3wgGKpdv1t8",
-  lyrics: `We were made out of lightning
-Sufferin' pain we should see by now
-And we were burnt down like Catholics
-On a winter road, never so cold
-
-And I abandon my family
-In a fit of rage, in a fit of want for you
-Cause there's nothing else to do when you're confused
-When you're confused
-
-You coddle, and you're cat-like
-I am scared
-Your bald tongue, your right hand, your last piece
-And I never really knew, who'd you see
-It's okay, it's okay, it's okay
-
-Now I, I keep it inside of me
-Hoping you one day will let me go
-It's the end, it's nothing I ended
-So grab your arms, and dive into the night, into the night
-
-I am not your savior
-I'm just a friend keeping you alive
-And eye sight proves that you're haunted
-The same way that you speak all the time`,
-}
+import { mock } from "../global/Mock"
 
 export function Home() {
+  const MOCK_INDEX = 1;
   const navigate = useNavigate()
-  const [videoUrl, setVideoUrl] = useState<string>(example.videoId)
+  // const [videoUrl, setVideoUrl] = useState<string>('')
+  const [videoUrl, setVideoUrl] = useState<string>(mock[MOCK_INDEX].videoId)
   const [videoId, setVideoId] = useState<string>("")
   const [videoData, setVideoData] = useState<YouTubeOEmbed>()
-  const [lyrics, setLyrics] = useState<string>(example.lyrics)
+  // const [lyrics, setLyrics] = useState<string>('')
+  const [lyrics, setLyrics] = useState<string>(mock[MOCK_INDEX].lyrics)
   let rawLyricsData: RawLyrics = { videoId: "", lyrics: "" }
 
   const parseVideoUrl = (url: string) => {
@@ -112,7 +87,12 @@ export function Home() {
         </form>
 
         {videoData && (
-          <a className="home__card-link" href={videoUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            className="home__card-link"
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <VideoCard {...videoData} />
           </a>
         )}

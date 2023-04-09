@@ -17,15 +17,17 @@ export function Instructions() {
         </div>
         <div className="instructions__label">Legendar</div>
       </div>
+
       <KeyboardArrows
         label={"Avançar / Retroceder vídeo"}
-        showArrowUp={true}
-        showArrowDown={true}
+        hideArrowUp={true}
+        hideArrowDown={true}
       />
+
       <KeyboardArrows
         label={"Próxima frase / Frase anterior"}
-        showArrowLeft={true}
-        showArrowRight={true}
+        hideArrowLeft={true}
+        hideArrowRight={true}
       />
     </div>
   )

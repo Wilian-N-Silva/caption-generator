@@ -2,21 +2,21 @@ import { KeyboardKey } from "./KeyboardKey"
 
 interface KeyboardArrowsProps {
   label: string
-  showArrowUp?: boolean
-  showArrowDown?: boolean
-  showArrowLeft?: boolean
-  showArrowRight?: boolean
+  hideArrowUp?: boolean
+  hideArrowDown?: boolean
+  hideArrowLeft?: boolean
+  hideArrowRight?: boolean
 }
 export function KeyboardArrows(key: KeyboardArrowsProps) {
   return (
     <div className="instructions__detail">
       <div className="instructions__keys">
         <div className="flex__col flex__col--centered">
-          <KeyboardKey label="↑" isDisabled={key.showArrowUp} />
+          <KeyboardKey label="↑" isDisabled={key.hideArrowUp} />
           <div className="flex__row">
-            <KeyboardKey label="←" isDisabled={key.showArrowLeft} />
-            <KeyboardKey label="↓" isDisabled={key.showArrowDown} />
-            <KeyboardKey label="→" isDisabled={key.showArrowRight} />
+            <KeyboardKey label="←" isDisabled={key.hideArrowLeft} />
+            <KeyboardKey label="↓" isDisabled={key.hideArrowDown} />
+            <KeyboardKey label="→" isDisabled={key.hideArrowRight} />
           </div>
         </div>
       </div>
