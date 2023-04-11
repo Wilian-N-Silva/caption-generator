@@ -18,7 +18,7 @@ export function Home() {
       .get(`http://www.youtube.com/oembed?url=${videoUrl}&format=json`)
       .then((response) => {
         navigate("/lyrics", {
-          state: { videoUrl: videoUrl, videoData: response.data },
+          state: { videoUrl: videoUrl, videoJSONData: response.data },
         })
       })
       .finally(() => {
@@ -33,8 +33,8 @@ export function Home() {
     return match
   }
 
-  const handleURLFormSubmit = (data: React.FormEvent<HTMLFormElement>) => {
-    data.preventDefault()
+  const handleURLFormSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
     const isValid = validateYoutubeUrl(videoUrl)
 
     if (!isValid) {

@@ -1,174 +1,118 @@
-import { useLocation } from "react-router-dom"
-import { useEffect, useRef, useState } from "react"
-import { TimedLyrics } from "../global/Interfaces"
-import { Instructions } from "../components/Instructions"
-import { Player } from "../components/Player"
 import ReactPlayer from "react-player"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
-interface captionTimestamp {
-  start: number
-  end: number
-}
+import { VideoData } from "../global/Interfaces"
+import { useEffect, useRef, useState } from "react"
+
+import IconArrowLeft from "../assets/icons/ArrowLeft.svg"
+import IconPause from "../assets/icons/Pause.svg"
+import IconPlay from "../assets/icons/Play.svg"
+import IconRewind from "../assets/icons/Rewind.svg"
+import IconFastForward from "../assets/icons/FastForward.svg"
+import { OnProgressProps } from "react-player/base"
 
 export function Caption() {
-  const location = useLocation()
+  const navigate = useNavigate()
   const playerRef = useRef<ReactPlayer>(null)
+  const playerRefBlurred = useRef<ReactPlayer>(null)
 
-  const { rawLyricsData } = location.state
+  const location = useLocation()
+  const { videoData } = location.state.contentData
+  const { lyricsData } = location.state.contentData
 
-  const [selectedIdx, setSelectedIdx] = useState<number>(0)
-  const [videoId, setVideoId] = useState<string>("")
-  const [lyricsArr, setLyricsArr] = useState<string[]>([])
-  const [timedLyrics, setTimedLyrics] = useState<TimedLyrics[]>([])
   const [playedSeconds, setPlayedSeconds] = useState<number>(0)
-  const [isPlayingVideo, setIsPlayingVideo] = useState<boolean>(false)
-  const [isPressingSpace, setIsPressingSpace] = useState<boolean>(false)
-  const [captionTimestampStart, setCaptionTimestampStart] = useState<number>(0)
-  const [verse, setVerse] = useState<string | null>()
 
-  const handleLocationData = () => {
-    const splittedLyrics = rawLyricsData.lyrics
-      .split("\n")
-      .filter((lyric: string) => lyric)
-    setVideoId(rawLyricsData.videoId)
-    setLyricsArr(splittedLyrics)
-  }
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [cinematicMode, setCinematicMode] = useState<boolean>(true)
 
-  const handleVerse = (seconds: number) => {
-    const legenda = timedLyrics.find(
-      (caption) => caption.start <= seconds && caption.end >= seconds
-    )
-
-    if (!legenda) {
-      setVerse("")
-      return
-    }
-    setVerse(legenda.text)
-  }
-
-  const secondsToISOPlayTime = (seconds: number) => {
-    const formattedTime = new Date(seconds * 1000).toISOString().slice(14, 23)
-    return formattedTime
-  }
-
-  const previousCaptionIndex = () => {
-    setSelectedIdx((prevIdx) =>
-      prevIdx === null ? 0 : (prevIdx - 1 + lyricsArr.length) % lyricsArr.length
-    )
-  }
-  const nextCaptionIndex = () => {
-    setSelectedIdx((prevIdx) =>
-      prevIdx === null ? 0 : (prevIdx + 1) % lyricsArr.length
-    )
+  const fastForwardVideo = () => {
+    const newTime = playerRef.current?.getCurrentTime()! + 10
+    playerRef.current?.seekTo(newTime)
+    if (cinematicMode) playerRefBlurred.current?.seekTo(newTime)
   }
 
   const rewindVideo = () => {
     const newTime = playerRef.current?.getCurrentTime()! - 10
     playerRef.current?.seekTo(newTime)
+
+    if (cinematicMode) playerRefBlurred.current?.seekTo(newTime)
   }
 
-  const fastForwardVideo = () => {
-    const newTime = playerRef.current?.getCurrentTime()! + 10
-    playerRef.current?.seekTo(newTime)
+  const handlePlayingState = () => {
+    setIsPlaying((prevState) => !prevState)
   }
 
-  const handleKeyUp = (ev: React.KeyboardEvent<HTMLDivElement>) => {
-    if (ev.code === "Space") {
-      setIsPressingSpace(false)
-      const timed: TimedLyrics = {
-        text: lyricsArr[selectedIdx],
-        start: captionTimestampStart,
-        end: playedSeconds,
-      }
-
-      const newData = [...timedLyrics, timed]
-
-      setTimedLyrics(newData)
-
-      // nextCaptionIndex()
-    }
-  }
-  const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
-    ev.preventDefault()
-    switch (ev.code) {
-      case "ArrowUp":
-        previousCaptionIndex()
-        break
-      case "ArrowDown":
-        nextCaptionIndex()
-        break
-      case "ArrowLeft":
-        rewindVideo()
-        break
-      case "ArrowRight":
-        fastForwardVideo()
-        break
-      case "KeyP":
-        setIsPlayingVideo((prevState) => !prevState)
-        break
-      case "Space":
-        if (selectedIdx !== null && !ev.repeat) {
-          setIsPressingSpace(true)
-          setCaptionTimestampStart(playedSeconds)
-        }
-        break
-      default:
-        break
-    }
+  const handleProgress = (progress: OnProgressProps) => {
+    setPlayedSeconds(progress.playedSeconds)
+    // handleVerse(progress.playedSeconds)
   }
 
-  useEffect(() => {
-    handleLocationData()
-  }, [])
+  const handleCinematicMode = () => {
+    setCinematicMode((prevState) => !prevState)
+  }
+
 
   return (
-    <div>
-      <div>
-        <ReactPlayer
-          ref={playerRef}
-          url={`https://www.youtube.com/watch?v=${videoId}`}
-          playing={isPlayingVideo}
-          // muted={true}
-          progressInterval={100}
-          onProgress={(progress) => {
-            setPlayedSeconds(progress.playedSeconds)
-            handleVerse(progress.playedSeconds)
-          }}
+    <div className="lyrics-page">
+      <header className="lyrics-page__header">
+        <div className="lyrics-page__header-wrapper">
+          <Link to={"/lyrics"} state={{ videoUrl: videoData.url }}>
+            <button className="button" type="submit">
+              <img src={IconArrowLeft} alt="" />
+              <span>Voltar</span>
+            </button>
+          </Link>
+        </div>
+
+        <h1 className="lyrics-page__title">{}</h1>
+        <div className="lyrics-page__header-wrapper"></div>
+      </header>
+
+      <main>
+        <div className="player">
+          <div className="player__video">
+            <ReactPlayer
+              ref={playerRef}
+              url={videoData.url}
+              playing={isPlaying}
+              controls={false}
+              pip={false}
+              progressInterval={100}
+              onProgress={handleProgress}
+            />
+            <div className="player__controls">
+              <button onClick={rewindVideo}>
+                <img src={IconRewind} alt="" />
+              </button>
+              <button onClick={handlePlayingState}>
+                <img src={isPlaying ? IconPause : IconPlay} alt="" />
+              </button>
+              <button onClick={fastForwardVideo}>
+                <img src={IconFastForward} alt="" />
+              </button>
+            </div>
+          </div>
+          <div className="player__captions">Lorem Ipsum</div>
+          {cinematicMode && (
+            <div className="player__blurred">
+              <ReactPlayer
+                ref={playerRefBlurred}
+                url={videoData.url}
+                playing={isPlaying}
+                controls={false}
+                muted={true}
+              />
+            </div>
+          )}
+        </div>
+        <input
+          type="checkbox"
+          name=""
+          id=""
+          checked={cinematicMode}
+          onChange={handleCinematicMode}
         />
-        <Instructions isPressingSpace={isPressingSpace} />
-      </div>
-      <div className="captions">{verse}</div>
-      <div className="lyrics">
-        <div
-          className="raw"
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          tabIndex={0}
-        >
-          {lyricsArr.map((row, index) => {
-            return (
-              <div
-                key={`raw_${index}`}
-                className={`raw__lyric ${
-                  index === selectedIdx ? "raw__lyric--selected" : ""
-                }`}
-              >
-                {row}
-              </div>
-            )
-          })}
-        </div>
-        <div className="timed">
-          {timedLyrics.map((row, index) => {
-            return (
-              <div
-                key={`timed_${index}`}
-                className="timed__lyric"
-              >{`${row.start} - ${row.end} -- ${row.text}`}</div>
-            )
-          })}
-        </div>
-      </div>
+      </main>
     </div>
   )
 }

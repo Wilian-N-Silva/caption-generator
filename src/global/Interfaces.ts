@@ -19,6 +19,19 @@ export interface RawLyrics {
   lyrics: string
 }
 
+export interface RawCaptionData {
+  videoData: VideoData
+  lyricsData: string[]
+}
+
+export interface VideoData {
+  url: string
+  title: string
+  author_name: string
+  thumbnail_url: string
+}
+
+
 export interface TimedLyrics {
   start: number,
   end: number,

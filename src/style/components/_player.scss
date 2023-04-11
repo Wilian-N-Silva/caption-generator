@@ -1,0 +1,55 @@
+.player {
+  position: relative;
+  border-radius: 8px;
+  // overflow: hidden;
+
+  &__video {
+    position: relative;
+    border-top-right-radius: 8px;
+  }
+
+  &__blurred {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(200px);
+    transform: scale(2);
+  }
+
+  &__video:hover &__controls {
+    opacity: 1;
+  }
+
+  &__controls {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 16px 8px;
+    transition: 0.3s;
+
+    background: rgba($color: $color-black-950, $alpha: 0.75);
+
+    & button {
+      background: none;
+      border: none;
+      transition: 0.3s;
+      &:hover {
+        transform: scale(1.3);
+        cursor: pointer;
+      }
+    }
+  }
+  &__captions {
+    text-align: center;
+    font: $typography-caption;
+    color: $color-lightning-yellow-400;
+    padding: 16px 8px;
+    background: rgba($color: $color-black-950, $alpha: 0.75);
+  }
+}

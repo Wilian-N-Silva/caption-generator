@@ -1,27 +1,55 @@
 import ReactPlayer from "react-player"
 import IconArrowLeft from "../assets/icons/ArrowLeft.svg"
 import IconArrowRight from "../assets/icons/ArrowRight.svg"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { mock } from "../global/Mock"
+import { RawCaptionData } from "../global/Interfaces"
 
 export function Lyrics() {
   const MOCK_INDEX = 1
 
+  const navigate = useNavigate()
+
   const location = useLocation()
   const { videoUrl } = location.state
-  const { videoData } = location.state
+  const { videoJSONData } = location.state
 
   const [lyrics, setLyrics] = useState<string>(mock[MOCK_INDEX].lyrics)
+  const [contentData, setContentData] = useState<RawCaptionData>()
 
-  const handleLocationData = () => {
-    console.log(videoUrl)
-    console.log(videoUrl, videoData)
+  const splitAndSanitizeLyrics = () => {
+    const splittedLyrics = lyrics.split("\n")
+    const sanitizedLyrics = splittedLyrics.filter((line: string) => line)
+
+    return sanitizedLyrics
   }
 
-  useEffect(() => {
-    handleLocationData()
-  }, [videoUrl])
+  const handleLyricFormSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
+
+    if (lyrics.length === 0) {
+      alert("Digite o texto desejado")
+      return
+    }
+
+    const lyricsArray = splitAndSanitizeLyrics()
+
+    const content: RawCaptionData = {
+      videoData: {
+        url: videoUrl,
+        title: videoJSONData.title,
+        author_name: videoJSONData.author_name,
+        thumbnail_url: videoJSONData.thumbnail_url,
+      },
+      lyricsData: lyricsArray,
+    }
+
+    setContentData(content)
+    navigate("/caption", {
+      state: { contentData: content },
+    })
+  }
 
   return (
     <div className="lyrics-page">
@@ -42,8 +70,8 @@ export function Lyrics() {
       </header>
 
       <main>
-        <ReactPlayer url={"https://www.youtube.com/watch?v=UiSB2Fbw9gs"} />
-        <form className="lyrics-page__form">
+        <ReactPlayer url={videoUrl} />
+        <form className="lyrics-page__form" onSubmit={handleLyricFormSubmit}>
           <div className="text-field">
             <label className="text-field__label" htmlFor="url-input">
               Letra
