@@ -7,5 +7,8 @@
 - [X] - Raw lyrics process
 - [X] - Caption navigation functionalities
 - [X] - Figma Prototype
-- [ ] - Styling
+- [ ] - Styling and Page Rework
+  - [ ] - Home
+  - [ ] - Lyrics
+  - [ ] - Caption
 - [ ] - Code refactor

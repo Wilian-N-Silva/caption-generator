@@ -6,7 +6,7 @@ import { Caption } from "./pages/Caption"
 import { NotFound } from "./pages/NotFound"
 import "./style/main.scss"
 import { Root } from "./pages/Root"
-import { Validation } from "./pages/Validation"
+import { Lyrics } from "./pages/Lyrics"
 
 // const router = createBrowserRouter([
 //   {
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/step/2",
-        element: <Validation />,
+        path: "/lyrics",
+        element: <Lyrics />,
       },
     ],
   },

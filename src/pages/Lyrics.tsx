@@ -1,14 +1,30 @@
 import ReactPlayer from "react-player"
 import IconArrowLeft from "../assets/icons/ArrowLeft.svg"
 import IconArrowRight from "../assets/icons/ArrowRight.svg"
-export function Validation() {
+import { Link, useLocation } from "react-router-dom"
+import { useEffect } from "react"
+
+export function Lyrics() {
+  const location = useLocation()
+  const { videoUrl } = location.state
+
+  const handleLocationData = () => {
+    console.log(videoUrl)
+  }
+
+  useEffect(() => {
+    handleLocationData()
+  }, [videoUrl])
+
   return (
     <div className="validation">
       <header className="validation__header">
-        <button className="button" type="submit">
-          <span>Voltar</span>
-          <img src={IconArrowLeft} alt="" />
-        </button>
+        <Link to={"/"}>
+          <button className="button" type="submit">
+            <span>Voltar</span>
+            <img src={IconArrowLeft} alt="" />
+          </button>
+        </Link>
         <h1>Lorem Ipsum da Silva Sauro</h1>
       </header>
 
