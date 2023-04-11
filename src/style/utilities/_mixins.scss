@@ -1,0 +1,26 @@
+@mixin shape-blob($shape-path) {
+  content: "";
+  top: 0;
+  left: 50%;
+  position: absolute;
+  height: 600px;
+  aspect-ratio: 1/1;
+  background: #{$shape-path} no-repeat center;
+  transition: 0.6s ease-out;
+  animation: rotateBlur 30s linear infinite;
+  transform-origin: 500px 200px;
+  opacity: 0.6;
+  filter: blur(128px);
+}
+
+@mixin gradient-border {
+      content: "";
+      z-index: -1;
+      border-radius: 8px;
+      position: absolute;
+      height: calc(100% + 4px);
+      width: calc(100% + 4px);
+      left: -2px;
+      top: -2px;
+      background: $to-right-hollywood-cerise-600-purple-heart-700;
+    }

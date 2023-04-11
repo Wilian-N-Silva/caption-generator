@@ -31,3 +31,9 @@ $color-purple-heart-700: #8e39c5;
 $color-purple-heart-800: #703198;
 $color-purple-heart-900: #5c287b;
 $color-purple-heart-950: #3f1259;
+
+$to-right-hollywood-cerise-600-purple-heart-700: linear-gradient(
+  90deg,
+  $color-hollywood-cerise-600 0%,
+  $color-purple-heart-700 100%
+);

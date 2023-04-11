@@ -5,13 +5,10 @@ body {
 
 #root {
   height: auto;
-}
-
-
-.root {
   min-height: 100vh;
   background-color: $color-vulcan-950;
-
+  display: grid;
+  place-items: center;
   .blur {
     min-height: 100vh;
     width: 100%;
@@ -19,48 +16,35 @@ body {
     z-index: 0;
     overflow: hidden;
 
-    &::after {
-      content: "";
-      background: $shape-blob-pink;
-      inset: 0;
-      position: absolute;
-      height: 600px;
-      width: 600px;
-      aspect-ratio: 1/1;
-      background-repeat: no-repeat;
-      background-position: center;
 
-      transition: 0.6s ease-out;
-      animation: rotateBlur 30s linear infinite;
-      transform-origin: 500px 200px;
+
+    &::after {
+      @include shape-blob($shape-blob-pink);
     }
     &::before {
-      content: "";
-      background: $shape-blob-purple;
-      top: 0;
-      opacity: 0.5;
-      left: 25%;
-      position: absolute;
-      height: 600px;
-      width: 600px;
-      aspect-ratio: 1/1;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: 0.6s ease-out;
-      animation: rotateBlur 30s linear infinite;
-      transform-origin: 500px 300px;
+      @include shape-blob($shape-blob-purple);
     }
   }
 
-  &.shape-blur {
-    .blur::after,
-    .blur::before {
-      opacity: 0.6;
-
-      filter: blur(128px);
-    }
+  .inner {
+    max-width: 1440px;
+    z-index: 1;
+    min-height: 100vh;
+    width: 100%;
   }
+}
 
+@keyframes rotateBlur {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    transform-origin: 0 0;
+  }
+}
+
+/*
   &.step-2 {
     .blur::before {
       left: 25%;
@@ -81,24 +65,4 @@ body {
     }
   }
 
-  .inner {
-    display: grid;
-    place-items: center;
-    z-index: 1;
-    min-height: 100vh;
-    width: 100%;
-    backdrop-filter: blur(2px);
-    color: white;
-    font: $typography-heading-1;
-  }
-}
-
-@keyframes rotateBlur {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-    transform-origin: 0 0;
-  }
-}
+*/

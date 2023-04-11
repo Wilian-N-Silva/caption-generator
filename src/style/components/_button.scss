@@ -1,10 +1,24 @@
 .button {
-  padding: 12px 24px;
-  border: 1px solid gray;
-  border-radius: 4px;
-  transition: 0.2s ease-in-out;
+  position: relative;
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font: $typography-button;
+  color: $color-vulcan-50;
+  background-color: $color-vulcan-950;
+  letter-spacing: $typography-letter-spacing;
+  transition: .3s ease-in-out;
+  align-self: center;
+  align-items: center;
+
   &:hover {
+    background-color: transparent;
     cursor: pointer;
-    transform: scale(1.1) translateY(-2px);
+  }
+
+  &::before {
+    @include gradient-border;
   }
 }

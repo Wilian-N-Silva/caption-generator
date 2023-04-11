@@ -1,13 +1,35 @@
 .text-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
-  & input,
-  & textarea {
+
+  &__label {
+    display: block;
+    font: $typography-body-small;
+    color: $color-vulcan-50;
+    margin-bottom: 4px;
+  }
+
+  &__input {
+    position: relative;
+    display: flex;
+    gap: 8px;
     padding: 8px 16px;
-    border: 1px solid gray;
-    border-radius: 8px;
-    font: 400 16px/150% sans-serif;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    font: $typography-body;
+    color: $color-vulcan-50;
+    background-color: $color-vulcan-950;
+    transition: 0.3s ease-in-out;
+  }
+
+  &__input::after {
+    z-index: -1;
+    display: block;
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: red;
+    top: 0;
+    left: 0;
   }
 }
