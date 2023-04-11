@@ -43,9 +43,11 @@
       opacity: 0.3;
     }
     &--pressing {
-      opacity: 0.9;
+      // opacity: 0.9;
+      border-width: 1px solid black;
+
       background: rgba(black, 0.1);
-       transform: scale(0.9) translateY(2px);
+      transform: scale(0.9) translateY(2px);
     }
   }
 }

@@ -85,10 +85,11 @@ export function Caption() {
 
       setTimedLyrics(newData)
 
-      nextCaptionIndex()
+      // nextCaptionIndex()
     }
   }
   const handleKeyDown = (ev: React.KeyboardEvent<HTMLDivElement>) => {
+    ev.preventDefault()
     switch (ev.code) {
       case "ArrowUp":
         previousCaptionIndex()
