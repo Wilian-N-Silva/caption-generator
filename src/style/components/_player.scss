@@ -14,7 +14,7 @@
     left: 0;
     z-index: -1;
     filter: blur(200px);
-    transform: scale(2);
+    transform: scale(1.5);
   }
 
   &__video:hover &__controls {
@@ -47,6 +47,7 @@
   }
   &__captions {
     text-align: center;
+    min-height: 70px;
     font: $typography-caption;
     color: $color-lightning-yellow-400;
     padding: 16px 8px;

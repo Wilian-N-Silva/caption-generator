@@ -3,12 +3,10 @@ import IconArrowLeft from "../assets/icons/ArrowLeft.svg"
 import IconArrowRight from "../assets/icons/ArrowRight.svg"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { mock } from "../global/Mock"
+import { MOCK_INDEX, mock } from "../global/Mock"
 import { RawCaptionData } from "../global/Interfaces"
 
 export function Lyrics() {
-  const MOCK_INDEX = 1
-
   const navigate = useNavigate()
 
   const location = useLocation()

@@ -1,5 +1,9 @@
 .raw__lyric {
+  border-radius: 8px;
+  padding: 0 8px;
+  color: $color-vulcan-50;
+  
   &--selected {
-    background: rgba($color: gray, $alpha: 0.6);
+    background: rgba($color: $color-vulcan-900, $alpha: 0.6);
   }
 }

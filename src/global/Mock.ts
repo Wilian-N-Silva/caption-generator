@@ -1,5 +1,7 @@
 import { RawLyrics } from "./Interfaces"
 
+export const MOCK_INDEX = 3
+
 export const mock: RawLyrics[] = [
   {
     videoId: "https://www.youtube.com/watch?v=3wgGKpdv1t8",
@@ -77,5 +79,103 @@ Living in the days of...
 (Days of thunder)
 (Days of thunder)
 (Days of thunder)`,
+  },
+  {
+    videoId: "https://www.youtube.com/watch?v=aUJuwNxNUWQ",
+
+    lyrics: `Molten bloody earth
+A focused open wound
+All highways lead right here
+Ghost
+
+Storms and heavy air
+Riots in the street
+I’ll take you somewhere safe
+Ghost
+
+Will we feel the same
+Caught between the sheets
+Time is time again
+Ghost
+
+Just show me your world
+Will we feel the same
+
+Dancing around my head
+Glowing stems of death
+Time is time again
+Ghost
+
+Anodyne you hurt like heaven
+Physical comfort drift away
+Anodyne you move like heaven
+Physical comfort drift away
+Anodyne distortion has brought us back together
+Operation Overlife guide us away`,
+  },
+  {
+    videoId: "https://www.youtube.com/watch?v=dNup_awYjUI",
+    lyrics: `Day-trader in a tie-dyed jumpsuit
+And a gutter punk kid with a neck tattoo
+They're hookin' up at the unisex bathroom
+It was Brooklyn, it was Friday, it was love
+Across the bar sat the hip-hop purist
+Arguing with the jazz obscurists
+And in the corner were the terrified tourists
+Brooklyn, Friday, love
+
+Angel choirs on the corner all night
+Sing Johnny Cash and Jackson 5
+A little heaven you can stumble into
+We got your invite tonight
+
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+
+They come from Mississippie and La La Land
+New-wave hippies and the pop-goth glam
+It's just 'cause parents don't understand
+It was Brooklyn, it was Friday, it was love
+From this roof, you can see the stars
+We are the left bank dreamers and the avant-garde
+I'll sing my borrowed song on your borrowed guitar
+It was Brooklyn, it was Friday, it was love
+
+Angel choirs on the midnight G train
+Some Beastie Boys and Kurt Cobain
+A revolution you can learn to dance to
+With a friendly face on the way
+
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+
+Bushwick Avenue
+Bedford Avenue
+Franklin Avenue
+I'm on my way, where are you?
+
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+Don't try to fight it
+Oh, it's just Brooklyn on a Friday
+
+It's just Brooklyn on a Friday
+It's just Brooklyn on a Friday
+Bushwick Avenue
+It's just Brooklyn on a Friday
+Bedford Avenue
+It's just Brooklyn on a Friday
+Franklin Avenue
+It's just Brooklyn on a Friday
+I'm on my way (where are you?)
+It's just Brooklyn on a Friday (ooh, ooh)`,
   },
 ]
