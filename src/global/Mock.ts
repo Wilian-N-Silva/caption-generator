@@ -31,8 +31,7 @@ The same way that you speak all the time`,
   },
   {
     videoId: "https://www.youtube.com/watch?v=UiSB2Fbw9gs",
-    lyrics: `
-Love is a setting sun
+    lyrics: `Love is a setting sun
 Is a smoking gun
 Is a 4 letter word
 I hope it hurts
@@ -77,7 +76,6 @@ Living in the days of thunder
 Living in the days of...
 (Days of thunder)
 (Days of thunder)
-(Days of thunder)
-`,
+(Days of thunder)`,
   },
 ]

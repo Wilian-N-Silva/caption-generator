@@ -9,7 +9,7 @@
   color: $color-vulcan-50;
   background-color: $color-vulcan-950;
   letter-spacing: $typography-letter-spacing;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
   align-self: center;
   align-items: center;
 
@@ -20,5 +20,17 @@
 
   &::before {
     @include gradient-border;
+  }
+
+  &--loading {
+    & img {
+      animation: rotateIcon 1s linear infinite;
+    }
+  }
+}
+
+@keyframes rotateIcon {
+  to {
+    transform: rotate(360deg);
   }
 }

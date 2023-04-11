@@ -1,17 +1,25 @@
-.home-page {
+.lyrics-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
-  justify-content: center;
   gap: 64px;
 
-  &__title {
-    font: $typography-heading-1;
-  }
+  &__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 0;
+    align-items: center;
 
-  &__subtitle {
-    font: $typography-heading-3;
+    &-wrapper {
+      min-width: 125px;
+    }
+
+    &__title {
+      font: $typography-body;
+      letter-spacing: $typography-letter-spacing;
+    }
   }
 
   & main {
@@ -19,6 +27,7 @@
     place-items: center;
     width: 100%;
     max-width: 640px;
+    gap: 32px;
   }
 
   &__form {

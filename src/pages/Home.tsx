@@ -1,12 +1,30 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import IconMagnifyingGlass from "../assets/icons/MagnifyingGlass.svg"
+import IconSpinnerGap from "../assets/icons/SpinnerGap.svg"
 import { mock } from "../global/Mock"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export function Home() {
   const MOCK_INDEX = 1
-  const navigate = useNavigate()
   const [videoUrl, setVideoUrl] = useState<string>(mock[MOCK_INDEX].videoId)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const navigate = useNavigate()
+
+  const fetchVideoData = () => {
+    setIsLoading(true)
+    axios
+      .get(`http://www.youtube.com/oembed?url=${videoUrl}&format=json`)
+      .then((response) => {
+        navigate("/lyrics", {
+          state: { videoUrl: videoUrl, videoData: response.data },
+        })
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }
 
   const validateYoutubeUrl = (url: string) => {
     const regExp =
@@ -17,28 +35,26 @@ export function Home() {
 
   const handleURLFormSubmit = (data: React.FormEvent<HTMLFormElement>) => {
     data.preventDefault()
-
     const isValid = validateYoutubeUrl(videoUrl)
-    if (!isValid) return
 
-    const stateObj = {
-      url: videoUrl,
+    if (!isValid) {
+      alert("URL Inválida")
+      return
     }
 
-    navigate("/lyrics", { state: { videoUrl: videoUrl } })
+    fetchVideoData()
   }
 
   return (
-    <div className="home">
-      <header className="home__header">
-        <h1 className="home__title">Caption Generator</h1>
-        <h2 className="home__subtitle">
-          Legende seus vídeos de maneira rápida e exporte como CRT
+    <div className="home-page">
+      <header className="home-page__header">
+        <h1 className="home-page__title">Caption Generator</h1>
+        <h2 className="home-page__subtitle">
+          Legende seus vídeos de maneira rápida e exporte como SRT
         </h2>
       </header>
-
       <main>
-        <form className="home__form" onSubmit={handleURLFormSubmit}>
+        <form className="home-page__form" onSubmit={handleURLFormSubmit}>
           <div className="text-field">
             <label className="text-field__label" htmlFor="url-input">
               URL do vídeo
@@ -53,9 +69,15 @@ export function Home() {
             </div>
           </div>
 
-          <button className="button" type="submit">
-            <span>Procurar</span>
-            <img src={IconMagnifyingGlass} alt="" />
+          <button
+            className={`button ${isLoading ? "button--loading" : ""}`}
+            type="submit"
+          >
+            <span>{isLoading ? "Procurando" : "Procurar"}</span>
+            <img
+              src={isLoading ? IconSpinnerGap : IconMagnifyingGlass}
+              alt=""
+            />
           </button>
         </form>
       </main>
