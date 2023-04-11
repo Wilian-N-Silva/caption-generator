@@ -1,5 +1,4 @@
 .text-field {
-
   &__label {
     display: block;
     font: $typography-body-small;
@@ -7,29 +6,39 @@
     margin-bottom: 4px;
   }
 
-  &__input {
+  &__input-wrapper {
     position: relative;
-    display: flex;
-    gap: 8px;
-    padding: 8px 16px;
-    border: none;
-    width: 100%;
-    border-radius: 6px;
-    font: $typography-body;
-    color: $color-vulcan-50;
-    background-color: $color-vulcan-950;
-    transition: 0.3s ease-in-out;
-  }
 
-  &__input::after {
-    z-index: -1;
-    display: block;
-    content: "";
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: red;
-    top: 0;
-    left: 0;
+    & input,
+    & textarea {
+      display: flex;
+      gap: 8px;
+      padding: 8px 16px;
+      border: none;
+      width: 100%;
+      border-radius: 6px;
+      font: $typography-body;
+      color: $color-vulcan-50;
+      background-color: $color-vulcan-950;
+      transition: 0.3s ease-in-out;
+    }
+
+    & textarea {
+      resize: none;
+      height: 100%;
+      width: 100%;
+    }
+
+    &--resizable {
+      padding: 2px;
+      border-radius: 8px;
+      resize: vertical;
+      min-height: 56px;
+      overflow: hidden;
+    }
+
+    &::before {
+      @include gradient-border;
+    }
   }
 }

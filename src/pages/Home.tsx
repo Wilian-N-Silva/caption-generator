@@ -1,3 +1,4 @@
+import IconMagnifyingGlass from "../assets/icons/MagnifyingGlass.svg"
 export function Home() {
   return (
     <div className="home">
@@ -8,17 +9,23 @@ export function Home() {
         </h2>
       </header>
 
-      <form className="home__form">
-        <div className="text-field">
-          <label className="text-field__label" htmlFor="url-input">
-            URL do vídeo
-          </label>
-          <input className="text-field__input" id="url-input" type="url" />
-        </div>
-        <button className="button" type="submit">
-          Procurar
-        </button>
-      </form>
+      <main>
+        <form className="home__form">
+          <div className="text-field">
+            <label className="text-field__label" htmlFor="url-input">
+              URL do vídeo
+            </label>
+            <div className="text-field__input-wrapper">
+              <input className="" id="url-input" type="url" />
+            </div>
+          </div>  
+
+          <button className="button" type="submit">
+            <span>Procurar</span>
+            <img src={IconMagnifyingGlass} alt="" />
+          </button>
+        </form>
+      </main>
     </div>
   )
 }

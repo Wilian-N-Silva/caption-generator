@@ -15,11 +15,18 @@
     font: $typography-heading-3;
   }
 
+  & main {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: 640px;
+  }
+
   &__form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 32px;
     width: 100%;
-    max-width: 640px;
   }
 }
