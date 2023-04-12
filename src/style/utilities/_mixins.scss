@@ -1,14 +1,14 @@
-@mixin shape-blob($shape-path) {
+@mixin shape-blob($shape-path, $position-left) {
   content: "";
-  top: 0;
-  left: 50%;
+  top: percentage(random(50) / 100);
+  left: percentage(random(100) / 100);
   position: absolute;
   height: 600px;
   aspect-ratio: 1/1;
   background: #{$shape-path} no-repeat center;
   transition: 0.6s ease-out;
   animation: rotateBlur 30s linear infinite;
-  transform-origin: 500px 200px;
+  transform-origin: random(500) random(200);
   opacity: 0.6;
   filter: blur(128px);
 }
@@ -23,5 +23,4 @@
   left: -2px;
   top: -2px;
   background: $to-right-hollywood-cerise-600-purple-heart-700;
-  
 }

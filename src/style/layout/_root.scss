@@ -17,14 +17,13 @@ body {
     position: absolute;
     z-index: 0;
     overflow: hidden;
-
-
+    filter: blur(20px);
 
     &::after {
-      @include shape-blob($shape-blob-pink);
+      @include shape-blob($shape-blob-pink,25%);
     }
     &::before {
-      @include shape-blob($shape-blob-purple);
+      @include shape-blob($shape-blob-purple,35%);
     }
   }
 
@@ -33,18 +32,11 @@ body {
     z-index: 1;
     min-height: 100vh;
     width: 100%;
+
   }
 }
 
-@keyframes rotateBlur {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-    transform-origin: 0 0;
-  }
-}
+
 
 /*
   &.step-2 {
