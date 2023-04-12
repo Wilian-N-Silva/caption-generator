@@ -7,7 +7,7 @@
 - [x] - Processamento da letra "crua"
 - [x] - Funcionalidades de navegação da Legenda
 - [x] - Protótipo no Figma
-- [-] - Estilização
+- [ ] - Estilização
   - [x] - Home
   - [x] - Letra
   - [ ] - Legenda
