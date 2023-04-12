@@ -156,6 +156,8 @@ export function Caption() {
                 ref={playerRef}
                 url={videoData.url}
                 playing={isPlaying}
+                onPlay={() => setIsPlaying(true)}
+                onPause={()=> setIsPlaying(false)}
                 controls={false}
                 pip={false}
                 progressInterval={100}
