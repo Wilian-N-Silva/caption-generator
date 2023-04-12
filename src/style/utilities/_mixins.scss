@@ -1,7 +1,7 @@
 @mixin shape-blob($shape-path, $position-left) {
   content: "";
-  top: percentage(random(50) / 100);
-  left: percentage(random(100) / 100);
+  top: percentage(calc(random(50) / 100));
+  left: percentage(calc(random(100) / 100));
   position: absolute;
   height: 600px;
   aspect-ratio: 1/1;
@@ -23,4 +23,15 @@
   left: -2px;
   top: -2px;
   background: $to-right-hollywood-cerise-600-purple-heart-700;
+}
+
+@mixin breakpoint-tablet {
+  @media screen and (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+@mixin breakpoint-desktop {
+  @media screen and (min-width: $breakpoint-desktop) {
+    @content;
+  }
 }

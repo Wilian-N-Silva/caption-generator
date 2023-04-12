@@ -75,6 +75,17 @@ export function Caption() {
     setLyricsArray(lyricsData)
   }
 
+  const formatToSRT = (index: number, line: TimedLyrics) =>
+    `${index} 00:${secondsToISOPlayTime(
+      line.start
+    )} --> 00:${secondsToISOPlayTime(line.end)} ${line.text}`
+
+
+  const secondsToISOPlayTime = (seconds: number) => {
+    const formattedTime = new Date(seconds * 1000).toISOString().slice(14, 23)
+    return formattedTime
+  }
+
   const handleKeyUp = (ev: React.KeyboardEvent<HTMLDivElement>) => {
     if (ev.code === "Space") {
       const timed: TimedLyrics = {
@@ -219,7 +230,7 @@ export function Caption() {
               {timedLyrics.map((line, index) => {
                 return (
                   <li key={`timed_${index}`} className="timed__lyric">
-                    {`${line.start} - ${line.end} -- ${line.text}`}
+                    {formatToSRT(index + 1, line)}
                   </li>
                 )
               })}

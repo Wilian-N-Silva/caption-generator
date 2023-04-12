@@ -2,7 +2,7 @@ html,
 body {
   font: $typography-body;
   color: $color-vulcan-50;
-} 
+}
 
 #root {
   height: auto;
@@ -10,6 +10,7 @@ body {
   background-color: $color-vulcan-950;
   display: grid;
   place-items: center;
+
   .blur {
     min-height: 100vh;
     width: 100%;
@@ -20,23 +21,27 @@ body {
     filter: blur(20px);
 
     &::after {
-      @include shape-blob($shape-blob-pink,25%);
+      @include shape-blob($shape-blob-pink, 25%);
     }
     &::before {
-      @include shape-blob($shape-blob-purple,35%);
+      @include shape-blob($shape-blob-purple, 35%);
     }
   }
 
   .inner {
-    max-width: 1440px;
     z-index: 1;
     min-height: 100vh;
+    max-width: $container-max-w-tablet;
     width: 100%;
+    padding: 0 24px;
+  }
 
+  @include breakpoint-desktop {
+    .inner {
+      max-width: $container-max-w-desktop;
+    }
   }
 }
-
-
 
 /*
   &.step-2 {

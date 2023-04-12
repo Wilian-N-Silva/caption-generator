@@ -68,7 +68,7 @@ export function Lyrics() {
       </header>
 
       <main>
-        <ReactPlayer url={videoUrl} />
+        <ReactPlayer url={videoUrl} width={'100%'} />
         <form className="lyrics-page__form" onSubmit={handleLyricFormSubmit}>
           <div className="text-field">
             <label className="text-field__label" htmlFor="url-input">

@@ -7,11 +7,22 @@
   gap: 64px;
 
   &__title {
-    font: $typography-heading-1;
+    text-align: center;
+    font: $typography-heading-2;
   }
 
   &__subtitle {
-    font: $typography-heading-3;
+    font: $typography-heading-3-small;
+  }
+
+  @include breakpoint-tablet {
+    font: $typography-heading-1;
+  }
+
+  @include breakpoint-desktop {
+    &__subtitle {
+      font: $typography-heading-3;
+    }
   }
 
   & main {

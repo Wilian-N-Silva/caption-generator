@@ -16,10 +16,17 @@
     &-wrapper {
       min-width: 125px;
     }
+  }
 
+  &__title {
+    display: none;
+    font: $typography-body;
+    letter-spacing: $typography-letter-spacing;
+  }
+
+  @include breakpoint-desktop {
     &__title {
-      font: $typography-body;
-      letter-spacing: $typography-letter-spacing;
+      display: block;
     }
   }
 
@@ -37,5 +44,6 @@
     flex-direction: column;
     gap: 32px;
     width: 100%;
+    padding-bottom: 64px;
   }
 }

@@ -1,14 +1,14 @@
 import { RawLyrics } from "./Interfaces"
 
-
 enum VIDEO {
   WE_WERE_MADE_OUT_OF_LIGHTNING = 0,
   DAYS_OF_THUNDER = 1,
   GHOST = 2,
-  BROOKLYN_FRIDAY_LOVE= 3
+  BROOKLYN_FRIDAY_LOVE = 3,
+  INDIGO_HOME = 4,
 }
 
-export const MOCK_INDEX = VIDEO.DAYS_OF_THUNDER
+export const MOCK_INDEX = VIDEO.INDIGO_HOME
 
 export const mock: RawLyrics[] = [
   {
@@ -185,5 +185,45 @@ Franklin Avenue
 It's just Brooklyn on a Friday
 I'm on my way (where are you?)
 It's just Brooklyn on a Friday (ooh, ooh)`,
+  },
+  {
+    videoId: "https://www.youtube.com/watch?v=WtSsaNZhgGQ",
+    lyrics: `Dry eyes, roaring falls
+God knows I've travelled far, so far
+But this is where it ends
+found me
+Right about the time that I found you
+For once, I was doing something right
+Night fell, you were asked
+Are you lost in paradise my love
+Or have you found a home?
+It's an awfully lonely road to walk alone
+But as I searched your flashing indigo eyes
+It echoed true that I loved you
+That I loved you dawn woke
+I knew that it was time for my return
+But this time it will likely hurt as hell
+Sometimes way across the ocean on
+A far away shore
+We both stand and we both call, both call
+If you give love and live long
+Then you'll never be alone
+If you give love and live long
+You you'll always have a home
+If you give love and live long
+Then you'll never be alone
+If you give love and live long
+You you'll always have a home
+Are you lost in paradise my love
+Or have you found a home?
+It's an awfully lonely road to walk alone
+But as I searched your flashing indigo eyes
+It echoed true that I loved you
+That I loved you we were lost in the fields
+Trading tales of home
+But everyone knew that your gaze was my home
+We were lost in the fields
+Trading tales of home
+But everyone knew that your gaze was my home`,
   },
 ]
