@@ -2,13 +2,14 @@
 
 ## Roadmap
 
-- [X] - Routes creation
-- [X] - Fetch video data from URL
-- [X] - Raw lyrics process
-- [X] - Caption navigation functionalities
-- [X] - Figma Prototype
-- [ ] - Styling and Page Rework
-  - [ ] - Home
-  - [ ] - Lyrics
+- [x] - Routes creation
+- [x] - Fetch video data from URL
+- [x] - Raw lyrics process
+- [x] - Caption navigation functionalities
+- [x] - Figma Prototype
+- [-] - Styling and Page Rework
+  - [x] - Home
+  - [x] - Lyrics
   - [ ] - Caption
+  - [ ] - Responsive Behavior
 - [ ] - Code refactor

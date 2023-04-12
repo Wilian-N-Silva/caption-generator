@@ -1,6 +1,6 @@
 import { RawLyrics } from "./Interfaces"
 
-export const MOCK_INDEX = 3
+export const MOCK_INDEX = 1
 
 export const mock: RawLyrics[] = [
   {

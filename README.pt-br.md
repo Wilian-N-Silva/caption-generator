@@ -2,10 +2,14 @@
 
 ## Roadmap
 
-- [X] - Criação de Rotas
-- [X] - Coletar dados do vídeo através da URL
-- [X] - Processamento da letra "crua"
-- [X] - Funcionalidades de navegação da Legenda
-- [X] - Protótipo no Figma
-- [ ] - Estilização
+- [x] - Criação de Rotas
+- [x] - Coletar dados do vídeo através da URL
+- [x] - Processamento da letra "crua"
+- [x] - Funcionalidades de navegação da Legenda
+- [x] - Protótipo no Figma
+- [-] - Estilização
+  - [x] - Home
+  - [x] - Letra
+  - [ ] - Legenda
+  - [ ] - Responsividade
 - [ ] - Refatoração do código

@@ -47,8 +47,9 @@
   }
   &__captions {
     text-align: center;
-    min-height: 70px;
+    min-height: 72px;
     font: $typography-caption;
+    letter-spacing: $typography-letter-spacing;
     color: $color-lightning-yellow-400;
     padding: 16px 8px;
     background: rgba($color: $color-black-950, $alpha: 0.75);
