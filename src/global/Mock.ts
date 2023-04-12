@@ -1,6 +1,14 @@
 import { RawLyrics } from "./Interfaces"
 
-export const MOCK_INDEX = 1
+
+enum VIDEO {
+  WE_WERE_MADE_OUT_OF_LIGHTNING = 0,
+  DAYS_OF_THUNDER = 1,
+  GHOST = 2,
+  BROOKLYN_FRIDAY_LOVE= 3
+}
+
+export const MOCK_INDEX = VIDEO.DAYS_OF_THUNDER
 
 export const mock: RawLyrics[] = [
   {

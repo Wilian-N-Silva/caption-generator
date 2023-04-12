@@ -10,11 +10,11 @@
 
   &__blurred {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    
     z-index: -1;
     filter: blur(200px);
-    transform: scale(1.5);
+    transform: scale(1.2) translate(0%, -50%);
   }
 
   &__video:hover &__controls {

@@ -10,6 +10,7 @@ import IconPlay from "../assets/icons/Play.svg"
 import IconRewind from "../assets/icons/Rewind.svg"
 import IconFastForward from "../assets/icons/FastForward.svg"
 import { OnProgressProps } from "react-player/base"
+import YouTubePlayer from "react-player/youtube"
 
 export function Caption() {
   const navigate = useNavigate()
@@ -157,11 +158,16 @@ export function Caption() {
                 url={videoData.url}
                 playing={isPlaying}
                 onPlay={() => setIsPlaying(true)}
-                onPause={()=> setIsPlaying(false)}
+                onPause={() => setIsPlaying(false)}
                 controls={false}
                 pip={false}
                 progressInterval={100}
                 onProgress={handleProgress}
+                config={{
+                  youtube: {
+                    embedOptions: { modestbranding: 1 },
+                  },
+                }}
               />
               <div className="player__controls">
                 <button onClick={rewindVideo}>
@@ -180,9 +186,9 @@ export function Caption() {
               <div className="player__blurred">
                 <ReactPlayer
                   ref={playerRefBlurred}
-                  url={videoData.url}
+                  url={`${videoData.url}&vq=small`}
                   playing={isPlaying}
-                  controls={false}
+                  controls={true}
                   muted={true}
                 />
               </div>
