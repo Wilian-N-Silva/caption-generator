@@ -1,0 +1,36 @@
+.caption-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  gap: 64px;
+
+  &__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 0;
+    align-items: center;
+    padding: 24px;
+
+    &-wrapper {
+      min-width: 125px;
+    }
+
+    @include breakpoint-desktop {
+      padding: 24px 0;
+    }
+  }
+  & main {
+    display: flex;
+    width: 100%;
+    // max-width: 640px;
+    gap: 32px;
+
+    & .col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+}

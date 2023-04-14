@@ -11,6 +11,9 @@ import IconRewind from "../assets/icons/Rewind.svg"
 import IconFastForward from "../assets/icons/FastForward.svg"
 import { OnProgressProps } from "react-player/base"
 import YouTubePlayer from "react-player/youtube"
+import { Instructions } from "../components/Instructions"
+import axios from "axios"
+import { api } from "../lib/axios"
 
 export function Caption() {
   const navigate = useNavigate()
@@ -31,6 +34,8 @@ export function Caption() {
 
   const [timedLyrics, setTimedLyrics] = useState<TimedLyrics[]>([])
   const [captionTimestampStart, setCaptionTimestampStart] = useState<number>(0)
+
+  const [isPressingSpace, setIsPressingSpace] = useState<boolean>(false)
 
   const fastForwardVideo = () => {
     const newTime = playerRef.current?.getCurrentTime()! + 10
@@ -80,7 +85,6 @@ export function Caption() {
       line.start
     )} --> 00:${secondsToISOPlayTime(line.end)} ${line.text}`
 
-
   const secondsToISOPlayTime = (seconds: number) => {
     const formattedTime = new Date(seconds * 1000).toISOString().slice(14, 23)
     return formattedTime
@@ -88,6 +92,8 @@ export function Caption() {
 
   const handleKeyUp = (ev: React.KeyboardEvent<HTMLDivElement>) => {
     if (ev.code === "Space") {
+      setIsPressingSpace(false)
+
       const timed: TimedLyrics = {
         text: lyricsArray[selectedIndex],
         start: captionTimestampStart,
@@ -119,7 +125,7 @@ export function Caption() {
         break
       case "Space":
         if (selectedIndex !== null && !ev.repeat) {
-          // setIsPressingSpace(true)
+          setIsPressingSpace(true)
           setCaptionTimestampStart(playedSeconds)
         }
         break
@@ -140,14 +146,41 @@ export function Caption() {
     setVerse(legenda.text)
   }
 
+  const handleSRTRequest = () => {
+    const requestData = {
+      fileFormat: "srt",
+      captions: timedLyrics,
+    }
+
+    const downloadFile = async (fileUrl: string, fileData:string) => {
+      const response = await axios({
+        url: fileUrl,
+        method: "GET",
+        responseType: "blob",
+      })
+
+      const downloadUrl = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement("a")
+      link.href = downloadUrl
+      link.setAttribute("download", fileData) // Defina o nome do arquivo aqui
+      document.body.appendChild(link)
+      link.click()
+    }
+
+    api.post("/export", requestData).then((response) => {
+
+     downloadFile(`${response.config.baseURL}/public/${response.data}`, response.data)
+    })
+  }
+
   useEffect(() => {
     handleIncomingData()
   }, [])
 
   return (
-    <div className="lyrics-page">
-      <header className="lyrics-page__header">
-        <div className="lyrics-page__header-wrapper">
+    <div className="caption-page">
+      <header className="caption-page__header">
+        <div className="caption-page__header-wrapper">
           <Link to={"/lyrics"} state={{ videoUrl: videoData.url }}>
             <button className="button" type="submit">
               <img src={IconArrowLeft} alt="" />
@@ -156,8 +189,8 @@ export function Caption() {
           </Link>
         </div>
 
-        <h1 className="lyrics-page__title">{}</h1>
-        <div className="lyrics-page__header-wrapper"></div>
+        <h1 className="caption-page__title">{}</h1>
+        <div className="caption-page__header-wrapper"></div>
       </header>
 
       <main>
@@ -192,7 +225,9 @@ export function Caption() {
                 </button>
               </div>
             </div>
-            <div className="player__captions">{verse}</div>
+            <div className="player__captions">
+              {isPressingSpace ? lyricsArray[selectedIndex] : verse}
+            </div>
             {cinematicMode && (
               <div className="player__blurred">
                 <ReactPlayer
@@ -226,15 +261,6 @@ export function Caption() {
                 )
               })}
             </ul>
-            <ul>
-              {timedLyrics.map((line, index) => {
-                return (
-                  <li key={`timed_${index}`} className="timed__lyric">
-                    {formatToSRT(index + 1, line)}
-                  </li>
-                )
-              })}
-            </ul>
           </div>
           <input
             type="checkbox"
@@ -243,6 +269,21 @@ export function Caption() {
             checked={cinematicMode}
             onChange={handleCinematicMode}
           />
+        </div>
+        <div className="col">
+          <Instructions isPressingSpace={isPressingSpace} />
+          <ul>
+            {timedLyrics.map((line, index) => {
+              return (
+                <li key={`timed_${index}`} className="timed__lyric">
+                  {formatToSRT(index + 1, line)}
+                </li>
+              )
+            })}
+          </ul>
+          <button className="button" onClick={handleSRTRequest}>
+            Baixar SRT
+          </button>
         </div>
       </main>
     </div>

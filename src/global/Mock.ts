@@ -6,9 +6,10 @@ enum VIDEO {
   GHOST = 2,
   BROOKLYN_FRIDAY_LOVE = 3,
   INDIGO_HOME = 4,
+  CYBERPUNK_TRAILER = 5,
 }
 
-export const MOCK_INDEX = VIDEO.INDIGO_HOME
+export const MOCK_INDEX = VIDEO.GHOST
 
 export const mock: RawLyrics[] = [
   {
@@ -225,5 +226,38 @@ But everyone knew that your gaze was my home
 We were lost in the fields
 Trading tales of home
 But everyone knew that your gaze was my home`,
+  },
+  {
+    videoId: "https://www.youtube.com/watch?v=liuFhVXAlZw",
+    lyrics: `Quer testar os valores de uma pessoa?
+Faz ela... encarar a morte.
+Uhg-uh! Johnny...
+Deixa comigo.
+A pressão ta insana!
+É choque neurogênico. Ele está morrendo.
+V? Tu tá aí?
+Ai... minha cabeça.
+E agora?
+E agora... você descobre o que precisa fazer.
+♪ a thing of beauty - i know ♪
+Você nunca recuou na sua vida, em nenhum aspecto,
+mesmo quando deveria.
+Você anda por Night City sabendo que uma bala perdida pode te matar numa viagem de táxi.
+Mas isso nunca impediu você de cair na ação.
+Você acha que enganou a morte?
+Foi a morte que enganou você.
+Se tiver que matar, mate.
+Se tiver que queimar tudo até virar pó,
+então queime.
+Delamain...!
+Pro chão, malando! Não se mexe!
+Fora da minha casa, agora!
+♪ will never fade away ♪
+♪ what you did to me - i know ♪
+♪ somehow I'll find a way ♪
+♪ but a thing of beauty ♪
+Tu prefere viver na paz que nem um zé-ninguém e morrer de velhice,
+ou apostar tudo para ditar a história e nem chegar na casa dos trinta?
+♪ we'll never fade away ♪`,
   },
 ]

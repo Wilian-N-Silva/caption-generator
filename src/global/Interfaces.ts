@@ -15,7 +15,7 @@ export interface YouTubeOEmbed {
 }
 
 export interface RawLyrics {
-  videoId: string,
+  videoId: string
   lyrics: string
 }
 
@@ -31,9 +31,12 @@ export interface VideoData {
   thumbnail_url: string
 }
 
-
 export interface TimedLyrics {
-  start: number,
-  end: number,
+  start: number
+  end: number
   text: string
+}
+type RequestBodyProps = {
+  fileFormat: string
+  captions: TimedLyrics[]
 }
