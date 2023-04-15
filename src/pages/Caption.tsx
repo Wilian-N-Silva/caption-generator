@@ -1,19 +1,22 @@
 import ReactPlayer from "react-player"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import { TimedLyrics, VideoData } from "../global/Interfaces"
+import {
+  CustomPlayerProps,
+  RequestBodyProps,
+  TimedLyrics,
+} from "../global/Interfaces"
 import { useEffect, useRef, useState } from "react"
 
 import IconArrowLeft from "../assets/icons/ArrowLeft.svg"
-import IconPause from "../assets/icons/Pause.svg"
-import IconPlay from "../assets/icons/Play.svg"
-import IconRewind from "../assets/icons/Rewind.svg"
-import IconFastForward from "../assets/icons/FastForward.svg"
+
 import { OnProgressProps } from "react-player/base"
-import YouTubePlayer from "react-player/youtube"
 import { Instructions } from "../components/Instructions"
 import axios from "axios"
 import { api } from "../lib/axios"
+import { CustomPlayer } from "../components/CustomPlayer"
+import { UntimedLine } from "../components/UntimedLine"
+import { TimedLine } from "../components/TimedLine"
 
 export function Caption() {
   const navigate = useNavigate()
@@ -76,18 +79,13 @@ export function Caption() {
     setCinematicMode((prevState) => !prevState)
   }
 
-  const handleIncomingData = () => {
-    setLyricsArray(lyricsData)
+  const handleSeekStartTime = (seconds: number) => {
+    playerRef.current?.seekTo(seconds)
+    if(!isPlaying) setIsPlaying(true)
   }
 
-  const formatToSRT = (index: number, line: TimedLyrics) =>
-    `${index} 00:${secondsToISOPlayTime(
-      line.start
-    )} --> 00:${secondsToISOPlayTime(line.end)} ${line.text}`
-
-  const secondsToISOPlayTime = (seconds: number) => {
-    const formattedTime = new Date(seconds * 1000).toISOString().slice(14, 23)
-    return formattedTime
+  const handleIncomingData = () => {
+    setLyricsArray(lyricsData)
   }
 
   const handleKeyUp = (ev: React.KeyboardEvent<HTMLDivElement>) => {
@@ -147,12 +145,12 @@ export function Caption() {
   }
 
   const handleSRTRequest = () => {
-    const requestData = {
+    const requestData: RequestBodyProps = {
       fileFormat: "srt",
       captions: timedLyrics,
     }
 
-    const downloadFile = async (fileUrl: string, fileData:string) => {
+    const downloadFile = async (fileUrl: string, fileData: string) => {
       const response = await axios({
         url: fileUrl,
         method: "GET",
@@ -162,14 +160,16 @@ export function Caption() {
       const downloadUrl = window.URL.createObjectURL(new Blob([response.data]))
       const link = document.createElement("a")
       link.href = downloadUrl
-      link.setAttribute("download", fileData) // Defina o nome do arquivo aqui
+      link.setAttribute("download", fileData)
       document.body.appendChild(link)
       link.click()
     }
 
     api.post("/export", requestData).then((response) => {
-
-     downloadFile(`${response.config.baseURL}/public/${response.data}`, response.data)
+      downloadFile(
+        `${response.config.baseURL}/public/${response.data}`,
+        response.data
+      )
     })
   }
 
@@ -195,52 +195,22 @@ export function Caption() {
 
       <main>
         <div className="col">
-          <div className="player">
-            <div className="player__video">
-              <ReactPlayer
-                ref={playerRef}
-                url={videoData.url}
-                playing={isPlaying}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                controls={false}
-                pip={false}
-                progressInterval={100}
-                onProgress={handleProgress}
-                config={{
-                  youtube: {
-                    embedOptions: { modestbranding: 1 },
-                  },
-                }}
-              />
-              <div className="player__controls">
-                <button onClick={rewindVideo}>
-                  <img src={IconRewind} alt="" />
-                </button>
-                <button onClick={handlePlayingState}>
-                  <img src={isPlaying ? IconPause : IconPlay} alt="" />
-                </button>
-                <button onClick={fastForwardVideo}>
-                  <img src={IconFastForward} alt="" />
-                </button>
-              </div>
-            </div>
-            <div className="player__captions">
-              {isPressingSpace ? lyricsArray[selectedIndex] : verse}
-            </div>
-            {cinematicMode && (
-              <div className="player__blurred">
-                <ReactPlayer
-                  ref={playerRefBlurred}
-                  url={`${videoData.url}&vq=small`}
-                  playing={isPlaying}
-                  controls={true}
-                  muted={true}
-                />
-              </div>
-            )}
-          </div>
-
+          <CustomPlayer
+            playerRef={playerRef}
+            playerRefBlurred={playerRefBlurred}
+            currentTime={playedSeconds}
+            setIsPlaying={setIsPlaying}
+            videoData={videoData}
+            cinematicMode={cinematicMode}
+            fastForwardVideo={fastForwardVideo}
+            rewindVideo={rewindVideo}
+            handlePlayingState={handlePlayingState}
+            handleProgress={handleProgress}
+            isPlaying={isPlaying}
+            currentCaption={
+              isPressingSpace ? lyricsArray[selectedIndex] : verse
+            }
+          />
           <div
             className=""
             onKeyDown={handleKeyDown}
@@ -250,14 +220,11 @@ export function Caption() {
             <ul onKeyDown={(ev) => handleKeyDown} tabIndex={0}>
               {lyricsArray.map((line, index) => {
                 return (
-                  <li
-                    key={`raw_${index}`}
-                    className={`raw__lyric ${
-                      index === selectedIndex ? "raw__lyric--selected" : ""
-                    }`}
-                  >
-                    {line}
-                  </li>
+                  <UntimedLine
+                    key={index}
+                    text={line}
+                    isSelected={index === selectedIndex}
+                  />
                 )
               })}
             </ul>
@@ -272,12 +239,17 @@ export function Caption() {
         </div>
         <div className="col">
           <Instructions isPressingSpace={isPressingSpace} />
-          <ul>
+          <ul className="timed">
             {timedLyrics.map((line, index) => {
               return (
-                <li key={`timed_${index}`} className="timed__lyric">
-                  {formatToSRT(index + 1, line)}
-                </li>
+                // <li key={`timed_${index}`} className="timed__lyric">
+                //   {formatToSRT(index + 1, line)}
+                // </li>
+                <TimedLine
+                  key={index}
+                  line={line}
+                  seekStartTime={handleSeekStartTime}
+                />
               )
             })}
           </ul>

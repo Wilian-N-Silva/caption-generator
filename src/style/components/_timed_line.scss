@@ -1,0 +1,40 @@
+.timed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  &__line {
+    display: flex;
+    width: 100%;
+    gap: 4px;
+
+    & button {
+      padding: 0;
+      height: 100%;
+      aspect-ratio: 1/1;
+      margin-right: 4px;
+
+      img {
+        height: 16px;
+      }
+    }
+    & input {
+      padding: 4px 8px;
+      background: rgba($color: $color-vulcan-950, $alpha: 0.5);
+      width: 14ch;
+      text-align: center;
+      border: 1px solid rgba($color: $color-vulcan-50, $alpha: 0.2);
+      border-radius: 4px;
+      color: $color-vulcan-50;
+
+      &:focus-visible {
+        border: 1px solid $color-vulcan-50;
+      }
+    }
+
+    & div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

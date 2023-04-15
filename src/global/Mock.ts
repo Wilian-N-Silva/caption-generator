@@ -9,7 +9,7 @@ enum VIDEO {
   CYBERPUNK_TRAILER = 5,
 }
 
-export const MOCK_INDEX = VIDEO.GHOST
+export const MOCK_INDEX = VIDEO.CYBERPUNK_TRAILER
 
 export const mock: RawLyrics[] = [
   {

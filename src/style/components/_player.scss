@@ -46,8 +46,11 @@
     }
   }
   &__captions {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     min-height: 72px;
+    justify-content: center;
     font: $typography-caption;
     letter-spacing: $typography-letter-spacing;
     color: $color-lightning-yellow-400;

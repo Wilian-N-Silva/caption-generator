@@ -1,3 +1,6 @@
+import ReactPlayer from "react-player"
+import { OnProgressProps } from "react-player/base"
+
 export interface YouTubeOEmbed {
   title: string
   author_name: string
@@ -36,7 +39,22 @@ export interface TimedLyrics {
   end: number
   text: string
 }
-type RequestBodyProps = {
+export interface RequestBodyProps {
   fileFormat: string
   captions: TimedLyrics[]
+}
+
+export interface CustomPlayerProps {
+  playerRef: React.RefObject<ReactPlayer>
+  playerRefBlurred: React.RefObject<ReactPlayer>
+  videoData: VideoData
+  currentTime: number
+  isPlaying: boolean
+  cinematicMode: boolean
+  setIsPlaying: (isPlaying: boolean) => void
+  handleProgress: (progress: OnProgressProps) => void
+  rewindVideo: () => void
+  fastForwardVideo: () => void
+  handlePlayingState: () => void
+  currentCaption: string | null | undefined
 }
