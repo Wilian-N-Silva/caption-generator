@@ -1,0 +1,19 @@
+.untimed {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  &__line {
+    border-radius: 8px;
+    padding: 0 8px;
+    color: $color-vulcan-50;
+
+    &:hover {
+      background: rgba($color: $color-vulcan-900, $alpha: 0.2);
+      cursor: pointer;
+    }
+
+    &--selected {
+      background: rgba($color: $color-vulcan-900, $alpha: 0.6) !important;
+    }
+  }
+}

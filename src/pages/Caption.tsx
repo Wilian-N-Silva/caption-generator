@@ -46,6 +46,8 @@ export function Caption() {
     if (cinematicMode) playerRefBlurred.current?.seekTo(newTime)
   }
 
+  const handleUntimedLineClick = (index: number) => setSelectedIndex(index)
+
   const rewindVideo = () => {
     const newTime = playerRef.current?.getCurrentTime()! - 10
     playerRef.current?.seekTo(newTime)
@@ -81,7 +83,7 @@ export function Caption() {
 
   const handleSeekStartTime = (seconds: number) => {
     playerRef.current?.seekTo(seconds)
-    if(!isPlaying) setIsPlaying(true)
+    if (!isPlaying) setIsPlaying(true)
   }
 
   const handleIncomingData = () => {
@@ -217,13 +219,18 @@ export function Caption() {
             onKeyUp={handleKeyUp}
             tabIndex={0}
           >
-            <ul onKeyDown={(ev) => handleKeyDown} tabIndex={0}>
+            <ul
+              className="untimed"
+              onKeyDown={(ev) => handleKeyDown}
+              tabIndex={0}
+            >
               {lyricsArray.map((line, index) => {
                 return (
                   <UntimedLine
                     key={index}
                     text={line}
                     isSelected={index === selectedIndex}
+                    onClick={() => handleUntimedLineClick(index)}
                   />
                 )
               })}

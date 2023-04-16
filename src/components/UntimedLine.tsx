@@ -1,10 +1,14 @@
 interface UntimedLineProps {
   isSelected: boolean
   text: string
+  onClick: () => void
 }
-export function UntimedLine({ text, isSelected }: UntimedLineProps) {
+export function UntimedLine({ text, isSelected, onClick }: UntimedLineProps) {
   return (
-    <li className={`raw__lyric ${isSelected ? "raw__lyric--selected" : ""}`}>
+    <li
+      className={`untimed__line ${isSelected ? "untimed__line--selected" : ""}`}
+      onClick={onClick}
+    >
       {text}
     </li>
   )

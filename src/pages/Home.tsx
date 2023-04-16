@@ -1,12 +1,12 @@
 import { useState } from "react"
 import IconMagnifyingGlass from "../assets/icons/MagnifyingGlass.svg"
 import IconSpinnerGap from "../assets/icons/SpinnerGap.svg"
-import { MOCK_INDEX, mock } from "../global/Mock"
+import { MOCK_INDEX, MOCK } from "../global/Mock"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 export function Home() {
-  const [videoUrl, setVideoUrl] = useState<string>(mock[MOCK_INDEX].videoId)
+  const [videoUrl, setVideoUrl] = useState<string>(MOCK[MOCK_INDEX].videoId)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const navigate = useNavigate()

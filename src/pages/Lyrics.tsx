@@ -3,7 +3,7 @@ import IconArrowLeft from "../assets/icons/ArrowLeft.svg"
 import IconArrowRight from "../assets/icons/ArrowRight.svg"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { MOCK_INDEX, mock } from "../global/Mock"
+import { MOCK_INDEX, MOCK } from "../global/Mock"
 import { RawCaptionData } from "../global/Interfaces"
 
 export function Lyrics() {
@@ -13,7 +13,7 @@ export function Lyrics() {
   const { videoUrl } = location.state
   const { videoJSONData } = location.state
 
-  const [lyrics, setLyrics] = useState<string>(mock[MOCK_INDEX].lyrics)
+  const [lyrics, setLyrics] = useState<string>(MOCK[MOCK_INDEX].lyrics)
   const [contentData, setContentData] = useState<RawCaptionData>()
 
   const splitAndSanitizeLyrics = () => {
@@ -68,7 +68,7 @@ export function Lyrics() {
       </header>
 
       <main>
-        <ReactPlayer url={videoUrl} width={'100%'} />
+        <ReactPlayer url={videoUrl} width={"100%"} />
         <form className="lyrics-page__form" onSubmit={handleLyricFormSubmit}>
           <div className="text-field">
             <label className="text-field__label" htmlFor="url-input">
