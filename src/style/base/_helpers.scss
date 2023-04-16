@@ -1,3 +1,7 @@
+body.debug * {
+  border: 1px solid red;
+}
+
 .flex {
   &__col {
     display: flex;
@@ -12,9 +16,4 @@
     display: flex;
     flex-direction: row;
   }
-}
-
-ul,
-li {
-  list-style: none;
 }

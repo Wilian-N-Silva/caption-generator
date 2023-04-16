@@ -196,7 +196,7 @@ export function Caption() {
       </header>
 
       <main>
-        <div className="col">
+        <div className="row">
           <CustomPlayer
             playerRef={playerRef}
             playerRefBlurred={playerRefBlurred}
@@ -213,14 +213,17 @@ export function Caption() {
               isPressingSpace ? lyricsArray[selectedIndex] : verse
             }
           />
+          <Instructions isPressingSpace={isPressingSpace} />
+        </div>
+        <div className="row">
           <div
-            className=""
+            className="untimed"
             onKeyDown={handleKeyDown}
             onKeyUp={handleKeyUp}
             tabIndex={0}
           >
             <ul
-              className="untimed"
+              className="untimed__container"
               onKeyDown={(ev) => handleKeyDown}
               tabIndex={0}
             >
@@ -236,33 +239,26 @@ export function Caption() {
               })}
             </ul>
           </div>
-          <input
-            type="checkbox"
-            name=""
-            id=""
-            checked={cinematicMode}
-            onChange={handleCinematicMode}
-          />
-        </div>
-        <div className="col">
-          <Instructions isPressingSpace={isPressingSpace} />
-          <ul className="timed">
-            {timedLyrics.map((line, index) => {
-              return (
-                // <li key={`timed_${index}`} className="timed__lyric">
-                //   {formatToSRT(index + 1, line)}
-                // </li>
-                <TimedLine
-                  key={index}
-                  line={line}
-                  seekStartTime={handleSeekStartTime}
-                />
-              )
-            })}
-          </ul>
-          <button className="button" onClick={handleSRTRequest}>
-            Baixar SRT
-          </button>
+
+          <div className="timed col">
+            <ul className="timed__container">
+              {timedLyrics.map((line, index) => {
+                return (
+                  // <li key={`timed_${index}`} className="timed__lyric">
+                  //   {formatToSRT(index + 1, line)}
+                  // </li>
+                  <TimedLine
+                    key={index}
+                    line={line}
+                    seekStartTime={handleSeekStartTime}
+                  />
+                )
+              })}
+            </ul>
+            <button className="button" onClick={handleSRTRequest}>
+              Baixar SRT
+            </button>
+          </div>
         </div>
       </main>
     </div>

@@ -15,11 +15,11 @@
     font: $typography-heading-3-small;
   }
 
-  @include breakpoint-tablet {
+  @include viewport-medium {
     font: $typography-heading-1;
   }
 
-  @include breakpoint-desktop {
+  @include viewport-large {
     &__subtitle {
       font: $typography-heading-3;
     }

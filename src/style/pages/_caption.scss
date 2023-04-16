@@ -17,20 +17,29 @@
       min-width: 125px;
     }
 
-    @include breakpoint-desktop {
+    @include viewport-large {
       padding: 24px 0;
     }
   }
   & main {
     display: flex;
+    flex-direction: column;
     width: 100%;
     // max-width: 640px;
+
     gap: 32px;
 
     & .col {
       display: flex;
       flex-direction: column;
       gap: 32px;
+    }
+
+    & .row {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+      justify-content: space-between;
     }
   }
 }

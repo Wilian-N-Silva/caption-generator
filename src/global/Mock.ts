@@ -6,9 +6,10 @@ enum VIDEO {
   GHOST = 2,
   BROOKLYN_FRIDAY_LOVE = 3,
   INDIGO_HOME = 4,
+  ON_THE_OTHER_SIDE = 5,
 }
 
-export const MOCK_INDEX = VIDEO.DAYS_OF_THUNDER
+export const MOCK_INDEX = VIDEO.ON_THE_OTHER_SIDE
 
 export const MOCK: RawLyrics[] = [
   {
@@ -226,4 +227,38 @@ We were lost in the fields
 Trading tales of home
 But everyone knew that your gaze was my home`,
   },
+  {
+    videoId:'https://youtu.be/Gruiw8HuPJQ',
+    lyrics: `To the world, we're scattered on a trail that was never seen twice
+And so we walk on while we can, the children of another life
+Now they say our time is up
+There’s a race to the summit's cold heights
+You got to work to play the game
+Not knowing when the end is in sight
+
+The Sun hides on the other side until you feel it, raise a distant call
+So for now, it's only a long night, can’t go on
+The Sun hides on the other side until you feel it, raise a distant call
+So for now, it's only a long night, can't go on and on
+
+Over town, the flags are up, every soul says they're fighting the good fight
+Paradox too plain to see, but only when the well runs dry
+You tell me I can't stand it
+All the pack says you better hold tight
+'Cause what you take ain't yours to keep
+When there's nothing that don’t have a price, no
+
+The Sun hides on the other side until you feel it, raise a distant call
+So for now, it’s only a long night, can't go on
+The Sun hides on the other side until you feel it, raise a distant call
+So for now, it’s only a long night, can't go on and on
+
+Is there a world out there I'm dreaming of?
+Is there a world out there I'm dreaming of?
+Is there a world out there I’m dreaming of?
+The Sun hides on the other side until you feel it, raise a distant call
+So for now, it's only a long night, can't go on
+The Sun hides on the other side until you feel it, raise a distant call
+So for now, it's only a long night, can't go on and on`
+  }
 ]

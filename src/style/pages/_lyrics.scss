@@ -24,7 +24,7 @@
     letter-spacing: $typography-letter-spacing;
   }
 
-  @include breakpoint-desktop {
+  @include viewport-large {
     &__title {
       display: block;
     }

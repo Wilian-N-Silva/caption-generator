@@ -1,7 +1,11 @@
 .untimed {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  max-width: 640px;
+  min-width: 640px;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
   &__line {
     border-radius: 8px;
     padding: 0 8px;

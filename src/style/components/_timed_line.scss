@@ -1,11 +1,18 @@
 .timed {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  width: 100%;
+  overflow-x: clip;
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+  }
+
   &__line {
     display: flex;
     width: 100%;
     gap: 4px;
+    padding-left: 2px;
 
     & button {
       padding: 0;
@@ -20,7 +27,7 @@
     & input {
       padding: 4px 8px;
       background: rgba($color: $color-vulcan-950, $alpha: 0.5);
-      width: 14ch;
+      width: 13ch;
       text-align: center;
       border: 1px solid rgba($color: $color-vulcan-50, $alpha: 0.2);
       border-radius: 4px;

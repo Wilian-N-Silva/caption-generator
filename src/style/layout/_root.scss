@@ -31,37 +31,13 @@ body {
   .inner {
     z-index: 1;
     min-height: 100vh;
-    max-width: $container-max-w-tablet;
     width: 100%;
     padding: 0 24px;
   }
 
-  @include breakpoint-desktop {
+  @include viewport-xxl {
     .inner {
-      max-width: $container-max-w-desktop;
+      max-width: $container-max-width-xxl;
     }
   }
 }
-
-/*
-  &.step-2 {
-    .blur::before {
-      left: 25%;
-    }
-    .blur::after {
-      left: 50%;
-    }
-  }
-
-  &.step-3 {
-    .blur::before {
-      top: 50%;
-      left: 25%;
-    }
-    .blur::after {
-      top: 50%;
-      left: 50%;
-    }
-  }
-
-*/

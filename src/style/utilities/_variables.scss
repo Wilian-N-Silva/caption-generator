@@ -4,12 +4,16 @@ $font-family-secondary: "Inter", sans-serif;
 $shape-blob-pink: url("/blur-shape/pink.svg");
 $shape-blob-purple: url("/blur-shape/purple.svg");
 
-$breakpoint-mobile: 320px;
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 1280px;
-$breakpoint-desktop-large: 1440px;
+$viewport-min-width-small: 576px;
+$viewport-min-width-medium: 768px;
+$viewport-min-width-large: 992px;
+$viewport-max-width-large: 1199px;
+$viewport-min-width-xl: 1200px;
+$viewport-max-width-xl: 1399px;
+$viewport-min-width-xxl: 1400px;
 
 $container-max-w-mobile: 272px;
-$container-max-w-tablet: 672px;
-$container-max-w-desktop: 1216px;
-$container-max-w-desktop-large: 1216px;
+$container-max-width-medium: 672px;
+$container-max-width-large: 768px;
+$container-max-width-xl: 992px;
+$container-max-width-xxl: 1200px;

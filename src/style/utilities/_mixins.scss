@@ -25,13 +25,28 @@
   background: $to-right-hollywood-cerise-600-purple-heart-700;
 }
 
-@mixin breakpoint-tablet {
-  @media screen and (min-width: $breakpoint-tablet) {
+@mixin viewport-small {
+  @media screen and (min-width: $viewport-min-width-small) {
     @content;
   }
 }
-@mixin breakpoint-desktop {
-  @media screen and (min-width: $breakpoint-desktop) {
+@mixin viewport-medium {
+  @media screen and (min-width: $viewport-min-width-medium) {
+    @content;
+  }
+}
+@mixin viewport-large {
+  @media screen and (min-width: $viewport-min-width-large) {
+    @content;
+  }
+}
+@mixin viewport-xl {
+  @media screen and (min-width: $viewport-min-width-xl) {
+    @content;
+  }
+}
+@mixin viewport-xxl {
+  @media screen and (min-width: $viewport-min-width-xxl) {
     @content;
   }
 }

@@ -15,7 +15,7 @@ export function TimedLine({ line, seekStartTime }: TimedLineProps) {
       </button>
       <input type="text" value={secondsToISOPlayTime(line.start)} />
       <input type="text" value={secondsToISOPlayTime(line.end)} />
-      <div>{line.text}</div>
+      <div title={line.text}>{line.text}</div>
     </li>
   )
 }
