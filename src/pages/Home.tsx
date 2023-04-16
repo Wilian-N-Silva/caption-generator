@@ -7,7 +7,7 @@ import axios from "axios"
 
 export function Home() {
   // const [videoUrl, setVideoUrl] = useState<string>(MOCK[MOCK_INDEX].videoId)
-  const [videoUrl, setVideoUrl] = useState<string>('')
+  const [videoUrl, setVideoUrl] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const navigate = useNavigate()
@@ -17,9 +17,24 @@ export function Home() {
     axios
       .get(`http://www.youtube.com/oembed?url=${videoUrl}&format=json`)
       .then((response) => {
+        if (response.status !== 200) {
+          alert(
+            "Houve um problema em localizar o vídeo. Confira o link ou aguarde um instante"
+          )
+          return
+        }
+
         navigate("/lyrics", {
           state: { videoUrl: videoUrl, videoJSONData: response.data },
         })
+      })
+      .catch((err) => {
+        if (err.status !== 200) {
+          alert(
+            "Houve um problema em localizar o vídeo. Confira o link ou aguarde um instante"
+          )
+        }
+        return
       })
       .finally(() => {
         setIsLoading(false)

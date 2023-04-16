@@ -14,7 +14,7 @@ export function Lyrics() {
   const { videoJSONData } = location.state
 
   // const [lyrics, setLyrics] = useState<string>(MOCK[MOCK_INDEX].lyrics)
-  const [lyrics, setLyrics] = useState<string>('')
+  const [lyrics, setLyrics] = useState<string>("")
   const [contentData, setContentData] = useState<RawCaptionData>()
 
   const splitAndSanitizeLyrics = () => {
@@ -44,7 +44,6 @@ export function Lyrics() {
       lyricsData: lyricsArray,
     }
 
-    setContentData(content)
     navigate("/caption", {
       state: { contentData: content },
     })
