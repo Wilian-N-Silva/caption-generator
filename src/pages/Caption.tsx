@@ -100,6 +100,22 @@ export function Caption() {
         end: playedSeconds,
       }
       const newData = [...timedLyrics, timed]
+
+      newData.sort((a, b) => {
+        const startA = a.start
+        const startB = b.start
+
+        if (startA < startB) {
+          return -1
+        }
+
+        if (startB > startA) {
+          return 1
+        }
+
+        return 0
+      })
+
       setTimedLyrics(newData)
       nextCaptionIndex()
     }
@@ -151,7 +167,7 @@ export function Caption() {
     seconds: number,
     isStartTime: boolean
   ) => {
-    const updatedTimedLine = timedLyrics.map((timedLyric, i) => {
+    const updatedTimedArr = timedLyrics.map((timedLyric, i) => {
       if (i !== lineIndex) {
         return timedLyric
       }
@@ -161,7 +177,15 @@ export function Caption() {
         : { ...timedLyric, end: seconds }
     })
 
-    setTimedLyrics(updatedTimedLine)
+    setTimedLyrics(updatedTimedArr)
+  }
+
+  const handleLineDelete = (lineIndex: number) => {
+    const filteredArr = timedLyrics.filter((line, index, arr) => {
+      return index !== lineIndex ? true : false
+    })
+
+    setTimedLyrics(filteredArr)
   }
 
   const handleSRTRequest = () => {
@@ -271,6 +295,7 @@ export function Caption() {
                     line={line}
                     seekStartTime={handleSeekStartTime}
                     changeTimedInput={changeTimedInput}
+                    handleLineDelete={handleLineDelete}
                   />
                 )
               })}

@@ -8,22 +8,16 @@
     gap: 16px;
   }
 
+  &__delete {
+    display: none;
+  }
+
   &__line {
     display: flex;
     width: 100%;
     gap: 4px;
-    padding-left: 2px;
+    padding: 0 2px;
 
-    & button {
-      padding: 0;
-      height: 100%;
-      aspect-ratio: 1/1;
-      margin-right: 4px;
-
-      img {
-        height: 16px;
-      }
-    }
     & input {
       padding: 4px 8px;
       background: rgba($color: $color-vulcan-950, $alpha: 0.5);
@@ -42,6 +36,12 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    &:hover {
+      & .timed__delete {
+        display: flex;
+      }
     }
   }
 }

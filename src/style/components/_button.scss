@@ -29,6 +29,27 @@
       animation: rotateIcon 1s linear infinite;
     }
   }
+
+  &__icon {
+    padding: 0;
+    height: 100%;
+    aspect-ratio: 1/1;
+
+    img {
+      height: 20px;
+    }
+  }
+
+  &__icon-play {
+    padding: 0 2px 0 0;
+    height: 100%;
+    aspect-ratio: 1/1;
+    margin-right: 4px;
+
+    img {
+      height: 16px;
+    }
+  }
 }
 
 @keyframes rotateIcon {
