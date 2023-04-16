@@ -249,6 +249,7 @@ export function Caption() {
                   // </li>
                   <TimedLine
                     key={index}
+                    index={index}
                     line={line}
                     seekStartTime={handleSeekStartTime}
                   />

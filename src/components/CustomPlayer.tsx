@@ -7,7 +7,7 @@ import IconFastForward from "../assets/icons/FastForward.svg"
 import YouTubePlayer from "react-player/youtube"
 import ReactPlayer from "react-player"
 import { OnProgressProps } from "react-player/base"
-import { secondsToISOPlayTime } from "../lib/format"
+import { convertSecondsToTimer } from "../lib/format"
 
 export function CustomPlayer({
   playerRef,
@@ -44,7 +44,7 @@ export function CustomPlayer({
           }}
         />
         <div className="player__controls">
-          <span>{secondsToISOPlayTime(currentTime)}</span>
+          <span>{convertSecondsToTimer(currentTime)}</span>
           <button onClick={rewindVideo}>
             <img src={IconRewind} alt="" />
           </button>
