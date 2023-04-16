@@ -36,6 +36,7 @@ export function TimedLine({
         onChange={(ev) =>
           changeTimedInput(index, convertTimerToSeconds(ev.target.value), true)
         }
+        
       />
       <input
         type="text"
@@ -44,7 +45,7 @@ export function TimedLine({
           changeTimedInput(index, convertTimerToSeconds(ev.target.value), false)
         }
       />
-      <div title={line.text}>{line.text}</div>
+      <div className="timed__text" title={line.text}>{line.text}</div>
       <button
         className="button button__icon timed__delete"
         onClick={(ev) => handleLineDelete(index)}

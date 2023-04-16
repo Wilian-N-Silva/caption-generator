@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 export function Home() {
-  const [videoUrl, setVideoUrl] = useState<string>(MOCK[MOCK_INDEX].videoId)
+  // const [videoUrl, setVideoUrl] = useState<string>(MOCK[MOCK_INDEX].videoId)
+  const [videoUrl, setVideoUrl] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const navigate = useNavigate()

@@ -9,7 +9,7 @@ enum VIDEO {
   ON_THE_OTHER_SIDE = 5,
 }
 
-export const MOCK_INDEX = VIDEO.ON_THE_OTHER_SIDE
+export const MOCK_INDEX = VIDEO.DAYS_OF_THUNDER
 
 export const MOCK: RawLyrics[] = [
   {

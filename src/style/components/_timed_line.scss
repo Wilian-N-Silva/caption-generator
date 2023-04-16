@@ -4,12 +4,18 @@
   &__container {
     display: flex;
     flex-direction: column;
-
     gap: 16px;
   }
 
   &__delete {
     display: none;
+  }
+
+  &__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
   }
 
   &__line {
@@ -32,13 +38,9 @@
       }
     }
 
-    & div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     &:hover {
+      cursor: default;
+      background: rgba($color: $color-vulcan-900, $alpha: 0.2);
       & .timed__delete {
         display: flex;
       }

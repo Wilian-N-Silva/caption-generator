@@ -10,6 +10,6 @@
 - [ ] - Styling and Page Rework
   - [x] - Home
   - [x] - Lyrics
-  - [ ] - Caption
+  - [X] - Caption
   - [ ] - Responsive Behavior
 - [ ] - Code refactor

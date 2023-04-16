@@ -13,7 +13,8 @@ export function Lyrics() {
   const { videoUrl } = location.state
   const { videoJSONData } = location.state
 
-  const [lyrics, setLyrics] = useState<string>(MOCK[MOCK_INDEX].lyrics)
+  // const [lyrics, setLyrics] = useState<string>(MOCK[MOCK_INDEX].lyrics)
+  const [lyrics, setLyrics] = useState<string>('')
   const [contentData, setContentData] = useState<RawCaptionData>()
 
   const splitAndSanitizeLyrics = () => {
