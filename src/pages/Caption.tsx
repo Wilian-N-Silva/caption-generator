@@ -146,6 +146,24 @@ export function Caption() {
     setVerse(legenda.text)
   }
 
+  const changeTimedInput = (
+    lineIndex: number,
+    seconds: number,
+    isStartTime: boolean
+  ) => {
+    const updatedTimedLine = timedLyrics.map((timedLyric, i) => {
+      if (i !== lineIndex) {
+        return timedLyric
+      }
+
+      return isStartTime
+        ? { ...timedLyric, start: seconds }
+        : { ...timedLyric, end: seconds }
+    })
+
+    setTimedLyrics(updatedTimedLine)
+  }
+
   const handleSRTRequest = () => {
     const requestData: RequestBodyProps = {
       fileFormat: "srt",
@@ -252,6 +270,7 @@ export function Caption() {
                     index={index}
                     line={line}
                     seekStartTime={handleSeekStartTime}
+                    changeTimedInput={changeTimedInput}
                   />
                 )
               })}
